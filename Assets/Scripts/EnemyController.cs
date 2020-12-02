@@ -25,18 +25,18 @@ public class EnemyController : MonoBehaviour
     }
     
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter2D(Collider2D trigger)
     {
-        if (collision.gameObject.CompareTag("Laser_Projectile"))
+        if (trigger.gameObject.CompareTag("Laser_Projectile"))
         {
             Destroy(this.gameObject);
-            Destroy(collision.gameObject);
+            Destroy(trigger.gameObject);
         }
 
-        if (collision.gameObject.CompareTag("Player"))
+        if (trigger.gameObject.CompareTag("Player"))
         {
             Destroy(this.gameObject);
-            PlayerController _player = collision.transform.GetComponent<PlayerController>();
+            PlayerController _player = trigger.transform.GetComponent<PlayerController>();
 
             if (_player != null)
             {

@@ -4,31 +4,33 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    private Rigidbody _playerRb;
+    private Rigidbody2D _playerRb;
+    private GameManager _gameManager;
     [SerializeField]
     private int _lives = 3;
-    Vector3 _offset;
     [SerializeField] 
-    private float _playerVerticalSpeed = 50.0f;
+    private float _playerVerticalSpeed = 500.0f;
     [SerializeField] 
-    private float _playerHorizontalSpeed = 100.0f;
+    private float _playerHorizontalSpeed = 1000.0f;
     [SerializeField] 
     private GameObject _laserPrefab;
     [SerializeField]
-    private float _fireRate = 0.5f;
+    private GameObject _tripleLaserPrefab;
+    [SerializeField]  
+    private float _fireRate = 0.25f;
     private float _nextFire = 0.0f;
-    private float _xMinPosition = -11.5f;
-    private float _xMaxPosition = 11.5f;
+    private float _xMaxPosition = 9.5f;
     private float _yMinPosition = -4.0f;
     private float _yMaxPosition = -1.0f;
     private float _horizontalInput;
     private float _verticalInput;
+    private bool _tripeShotActive = true;
 
     // Start is called before the first frame update
     void Start()
     {
-        _playerRb = GetComponent<Rigidbody>();
-        
+        _playerRb = GetComponent<Rigidbody2D>();
+        _gameManager = GameObject.FindWithTag("GameManager").GetComponent<GameManager>(); 
     }
 
     // Update is called once per frame
@@ -36,14 +38,10 @@ public class PlayerController : MonoBehaviour
     {
         _horizontalInput = Input.GetAxis("Horizontal");
         _verticalInput = Input.GetAxis("Vertical");
-    }
-
-    void FixedUpdate()
-    {
         MovePlayer();
         ShootLaser();
     }
-
+    
     void MovePlayer()
     {
         _playerRb.AddForce(Vector3.up * _verticalInput * Time.deltaTime * _playerVerticalSpeed);
@@ -51,9 +49,9 @@ public class PlayerController : MonoBehaviour
         
         if (transform.position.x > _xMaxPosition)
         {
-            transform.position = new Vector3(_xMinPosition, transform.position.y, 0);
+            transform.position = new Vector3(-_xMaxPosition, transform.position.y, 0);
         }
-        else if (transform.position.x < _xMinPosition)
+        else if (transform.position.x < -_xMaxPosition)
         {
             transform.position = new Vector3(_xMaxPosition, transform.position.y, 0);
         }
@@ -64,10 +62,17 @@ public class PlayerController : MonoBehaviour
     void ShootLaser()
     {
         if (Input.GetKeyDown(KeyCode.Space) && Time.time > _nextFire)
-        {
-            _offset = transform.position + new Vector3(0, 0.75f, 0);
-            Instantiate(_laserPrefab, _offset, Quaternion.identity);
+        {       
+            if (_tripeShotActive)
+            {
+                Instantiate(_tripleLaserPrefab, transform.position + new Vector3(-0.1f, 0.0f, 0), Quaternion.identity);
+            }
+            else
+            {
+               Instantiate(_laserPrefab, transform.position + new Vector3(-0.1f, 0.0f, 0), Quaternion.identity);
+            }
             _nextFire = Time.time + _fireRate;
+
         }
 
     }
@@ -78,6 +83,8 @@ public class PlayerController : MonoBehaviour
         if (_lives <= 0)
         {
             Destroy(this.gameObject);
+            _gameManager.GameOver();
+            
         }
     }
 }
