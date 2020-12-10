@@ -4,10 +4,11 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    [SerializeField]
-    private GameObject _enemyPrefab;
-    [SerializeField]
-    private GameObject _enemyContainer;
+    [SerializeField] private GameObject _enemyPrefab;
+    [SerializeField] private GameObject _enemyContainer;
+    [SerializeField] private GameObject _powerUpPrefab;
+    [SerializeField] private GameObject _powerUpContainer;
+    [SerializeField] private GameObject _laserContainer;
     private bool _gameOver = false;
     private float _spawnPositionMaxX = 8.0f;
     private float _spawnPositionY = 7.0f;
@@ -15,6 +16,7 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         StartCoroutine(SpawnEnemies());
+        StartCoroutine(SpawnPowerUps());
     }
 
     // Update is called once per frame
@@ -25,11 +27,21 @@ public class GameManager : MonoBehaviour
 
     IEnumerator SpawnEnemies()
     {
-        while (_gameOver == false) 
+        while (!_gameOver) 
         { 
         yield return new WaitForSeconds(Random.Range(2, 4));
         GameObject _newEnemy = Instantiate(_enemyPrefab, CalculateRandomSpawnPosition(), Quaternion.identity);
             _newEnemy.transform.parent = _enemyContainer.transform;
+        }
+    }
+
+    IEnumerator SpawnPowerUps()
+    {
+        while (!_gameOver)
+        {
+            yield return new WaitForSeconds(Random.Range(5, 10));
+            GameObject _newPowerUp = Instantiate(_powerUpPrefab, CalculateRandomSpawnPosition(), Quaternion.identity);
+            _newPowerUp.transform.parent = _powerUpContainer.transform;        
         }
     }
 
@@ -44,6 +56,8 @@ public class GameManager : MonoBehaviour
     {
         _gameOver = true;
         _enemyContainer.SetActive(false);
+        _powerUpContainer.SetActive(false);
+        _laserContainer.SetActive(false);
     }
 
 }
