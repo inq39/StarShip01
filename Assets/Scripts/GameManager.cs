@@ -6,7 +6,7 @@ public class GameManager : MonoBehaviour
 {
     [SerializeField] private GameObject _enemyPrefab;
     [SerializeField] private GameObject _enemyContainer;
-    [SerializeField] private GameObject _powerUpPrefab;
+    [SerializeField] private GameObject[] _powerUpPrefab;
     [SerializeField] private GameObject _powerUpContainer;
     [SerializeField] private GameObject _laserContainer;
     private bool _gameOver = false;
@@ -17,12 +17,6 @@ public class GameManager : MonoBehaviour
     {
         StartCoroutine(SpawnEnemies());
         StartCoroutine(SpawnPowerUps());
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     IEnumerator SpawnEnemies()
@@ -39,10 +33,14 @@ public class GameManager : MonoBehaviour
     {
         while (!_gameOver)
         {
-            yield return new WaitForSeconds(Random.Range(5, 10));
-            GameObject _newPowerUp = Instantiate(_powerUpPrefab, CalculateRandomSpawnPosition(), Quaternion.identity);
+            yield return new WaitForSeconds(Random.Range(3, 7));
+                        
+            int randomPrefab = Random.Range(0, _powerUpPrefab.Length);
+
+            GameObject _newPowerUp = Instantiate(_powerUpPrefab[randomPrefab], CalculateRandomSpawnPosition(), Quaternion.identity);
             _newPowerUp.transform.parent = _powerUpContainer.transform;        
         }
+
     }
 
 

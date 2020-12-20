@@ -7,11 +7,13 @@ public class PlayerController : MonoBehaviour
     private Rigidbody2D _playerRb;
     private GameManager _gameManager;
     [SerializeField] private int _lives = 3;
-    [SerializeField] private float _playerVerticalSpeed = 500.0f;
-    [SerializeField] private float _playerHorizontalSpeed = 1000.0f;
+    [SerializeField] private float _playerVerticalSpeed;
+    [SerializeField] private float _playerHorizontalSpeed;
+    [SerializeField] private float _speedBoostMultiplier;
     [SerializeField] private GameObject _laserPrefab;
     [SerializeField] private GameObject _tripleLaserPrefab;
     [SerializeField] private GameObject _laserContainer;
+    [SerializeField] private GameObject _playerShield;
     [SerializeField] private float _fireRate = 0.25f;
     private float _nextFire = 0.0f;
     private float _xMaxPosition = 9.5f;
@@ -19,7 +21,9 @@ public class PlayerController : MonoBehaviour
     private float _yMaxPosition = -1.0f;
     private float _horizontalInput;
     private float _verticalInput;
-    private bool _tripleShotActive = false;
+    private bool _isTripleShotActive = false;
+    private bool _isSpeedBoostActive = false;
+    private bool _isShieldActive = false;
 
     // Start is called before the first frame update
     void Start()
@@ -41,6 +45,7 @@ public class PlayerController : MonoBehaviour
     {
         _playerRb.AddForce(Vector3.up * _verticalInput * Time.deltaTime * _playerVerticalSpeed);
         _playerRb.AddForce(Vector3.right * _horizontalInput * Time.deltaTime * _playerHorizontalSpeed);
+               
         
         if (transform.position.x > _xMaxPosition)
         {
@@ -58,14 +63,14 @@ public class PlayerController : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space) && Time.time > _nextFire)
         {       
-            if (_tripleShotActive)
+            if (_isTripleShotActive)
             {
                 GameObject _tripleLaser = Instantiate(_tripleLaserPrefab, transform.position + new Vector3(-0.1f, 0.0f, 0), Quaternion.identity);
                 _tripleLaser.transform.parent = _laserContainer.transform;
             }
             else
             {
-                GameObject _laser = Instantiate(_laserPrefab, transform.position + new Vector3(-0.1f, 0.0f, 0), Quaternion.identity);
+                GameObject _laser = Instantiate(_laserPrefab, transform.position + new Vector3(0.0f, 0.0f, 0), Quaternion.identity);
                 _laser.transform.parent = _laserContainer.transform;
             }
             _nextFire = Time.time + _fireRate;
@@ -75,25 +80,55 @@ public class PlayerController : MonoBehaviour
     }
     public void DestroyLive()
     {
+        if (_isShieldActive)
+        {
+            _isShieldActive = false;
+            _playerShield.SetActive(false);
+            return;
+        }
+
         _lives--;
 
         if (_lives <= 0)
         {
             Destroy(this.gameObject);
             _gameManager.GameOver();
-            
-        }
-    }
-
+        }    
+        
+    }   
+    #region PowerUps - activation + timer
     public void SetTripleShotActive()
     {
-        _tripleShotActive = true;
+        _isTripleShotActive = true;
         StartCoroutine(SetPowerUpActiveTime());
     }
 
     IEnumerator SetPowerUpActiveTime()
     {
         yield return new WaitForSeconds(5.0f);
-        _tripleShotActive = false;
+        _isTripleShotActive = false;
     }
+
+    public void SetSpeedBoostActive()
+    {
+        _isSpeedBoostActive = true;
+        _playerHorizontalSpeed *= _speedBoostMultiplier; 
+        _speedBoostMultiplier *= _speedBoostMultiplier;
+        StartCoroutine(SetSpeedBoostActiveTime());
+    }
+
+    IEnumerator SetSpeedBoostActiveTime()
+    {
+        yield return new WaitForSeconds(5.0f);
+        _isSpeedBoostActive = false;
+        _playerHorizontalSpeed /= _speedBoostMultiplier;
+        _speedBoostMultiplier /= _speedBoostMultiplier;
+    }
+
+    public void SetShieldActive()
+    {
+        _isShieldActive = true;
+        _playerShield.SetActive(true);
+    }
+    #endregion
 }
