@@ -6,6 +6,7 @@ public class PlayerController : MonoBehaviour
 {
     private Rigidbody2D _playerRb;
     private GameManager _gameManager;
+    private UIManager _uiManager;
     [SerializeField] private int _lives = 3;
     [SerializeField] private float _playerVerticalSpeed;
     [SerializeField] private float _playerHorizontalSpeed;
@@ -24,12 +25,15 @@ public class PlayerController : MonoBehaviour
     private bool _isTripleShotActive = false;
     private bool _isSpeedBoostActive = false;
     private bool _isShieldActive = false;
+    public int PlayerScore { get; private set; }
 
     // Start is called before the first frame update
     void Start()
     {
         _playerRb = GetComponent<Rigidbody2D>();
-        _gameManager = GameObject.FindWithTag("GameManager").GetComponent<GameManager>(); 
+        _gameManager = GameObject.FindWithTag("GameManager").GetComponent<GameManager>();
+        _uiManager = GameObject.Find("UI_Manager").GetComponent<UIManager>();
+        PlayerScore = 0;
     }
 
     // Update is called once per frame
@@ -88,6 +92,7 @@ public class PlayerController : MonoBehaviour
         }
 
         _lives--;
+        _uiManager.UpdateLivesStatus(_lives);
 
         if (_lives <= 0)
         {
@@ -131,4 +136,9 @@ public class PlayerController : MonoBehaviour
         _playerShield.SetActive(true);
     }
     #endregion
+
+    public void UpdatePlayerScore(int score)
+    {
+        PlayerScore += score;
+    }
 }

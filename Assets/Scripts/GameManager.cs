@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -12,11 +13,19 @@ public class GameManager : MonoBehaviour
     private bool _gameOver = false;
     private float _spawnPositionMaxX = 8.0f;
     private float _spawnPositionY = 7.0f;
-    // Start is called before the first frame update
-    void Start()
+
+ 
+    void Awake()
     {
-        StartCoroutine(SpawnEnemies());
-        StartCoroutine(SpawnPowerUps());
+        StartGame();
+    }
+
+    private void Update()
+    {
+      if (_gameOver && Input.GetKeyDown(KeyCode.R))
+        {
+            SceneManager.LoadScene(0);
+        }
     }
 
     IEnumerator SpawnEnemies()
@@ -48,6 +57,12 @@ public class GameManager : MonoBehaviour
     {
         float _spawnPositionX = Random.Range(-_spawnPositionMaxX, _spawnPositionMaxX);
         return new Vector3(_spawnPositionX, _spawnPositionY, 0);
+    }
+
+    public void StartGame()
+    {
+        StartCoroutine(SpawnEnemies());
+        StartCoroutine(SpawnPowerUps());
     }
 
     public void GameOver()
