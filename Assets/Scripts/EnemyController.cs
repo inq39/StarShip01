@@ -8,6 +8,9 @@ public class EnemyController : MonoBehaviour
     [SerializeField] private int _enemyScoreValue;
     private PlayerController _playerController;
     private Animator _destroyEnemyAnimator;
+    private AudioSource _explosionSound;
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -18,6 +21,7 @@ public class EnemyController : MonoBehaviour
             Debug.LogError("Player is NULL.");
         }
         _destroyEnemyAnimator = GetComponent<Animator>();
+        _explosionSound = GetComponent<AudioSource>();
         Destroy(gameObject, 4);
 
         
@@ -49,6 +53,7 @@ public class EnemyController : MonoBehaviour
             _playerController.UpdatePlayerScore(_enemyScoreValue);
             _destroyEnemyAnimator.SetTrigger("IsEnemyDestroyed");
 
+            _explosionSound.Play();
             _enemySpeed = 0f;
             Destroy(this.gameObject, 2.8f);
             Destroy(trigger.gameObject);
@@ -57,6 +62,7 @@ public class EnemyController : MonoBehaviour
         if (trigger.gameObject.CompareTag("Player"))
         {
             _enemySpeed = 0f;
+            _explosionSound.Play();
             _destroyEnemyAnimator.SetTrigger("IsEnemyDestroyed");
             Destroy(this.gameObject, 2.8f);
            // PlayerController _player = trigger.transform.GetComponent<PlayerController>();

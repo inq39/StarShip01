@@ -8,6 +8,7 @@ public class PowerUp : MonoBehaviour
     private float _positionMinY = -5.0f;
     [SerializeField] private int _powerupID;
     private PlayerController _playerController;
+    [SerializeField] private AudioClip _powerUpAudioClip;
     // Start is called before the first frame update
 
     private void Start()
@@ -29,6 +30,7 @@ public class PowerUp : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
+            AudioSource.PlayClipAtPoint(_powerUpAudioClip, transform.position);
             Destroy(this.gameObject);
 
             if (_playerController != null)

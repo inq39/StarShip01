@@ -27,6 +27,7 @@ public class PlayerController : MonoBehaviour
     private bool _isSpeedBoostActive = false;
     private bool _isShieldActive = false;
     public int PlayerScore { get; private set; }
+    private AudioSource _laserShootAudioClip;
 
     // Start is called before the first frame update
     void Start()
@@ -34,7 +35,23 @@ public class PlayerController : MonoBehaviour
         _playerRb = GetComponent<Rigidbody2D>();
         _gameManager = GameObject.FindWithTag("GameManager").GetComponent<GameManager>();
         _uiManager = GameObject.Find("UI_Manager").GetComponent<UIManager>();
+        _laserShootAudioClip = GetComponent<AudioSource>();
         PlayerScore = 0;
+
+        if (_gameManager == null)
+        {
+            Debug.LogError("The GameManager is null.");
+        }
+
+        if (_uiManager == null)
+        {
+            Debug.LogError("The UIManager is null.");
+        }
+
+        if (_laserShootAudioClip == null)
+        {
+            Debug.LogError("The AudioSource on the Player is null.");
+        }
     }
 
     // Update is called once per frame
@@ -79,7 +96,7 @@ public class PlayerController : MonoBehaviour
                 _laser.transform.parent = _laserContainer.transform;
             }
             _nextFire = Time.time + _fireRate;
-
+            _laserShootAudioClip.Play();
         }
 
     }

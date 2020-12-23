@@ -7,10 +7,12 @@ public class Asteroid : MonoBehaviour
     [SerializeField] private float _rotateSpeed = 6.0f;
     [SerializeField] private GameObject _asteroidExplosionAnimation;
     private GameManager _gameManager;
+
     // Start is called before the first frame update
     void Start()
     {
         _gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+        
     }
 
     // Update is called once per frame
@@ -25,6 +27,7 @@ public class Asteroid : MonoBehaviour
         {
             _rotateSpeed = 0;
             Instantiate(_asteroidExplosionAnimation, transform.position, Quaternion.identity);
+            
             _gameManager.StartGame();
             Destroy(other.gameObject);
             Destroy(this.gameObject, 0.25f);
