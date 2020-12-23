@@ -14,11 +14,6 @@ public class GameManager : MonoBehaviour
     private float _spawnPositionMaxX = 8.0f;
     private float _spawnPositionY = 7.0f;
 
- 
-    void Awake()
-    {
-        StartGame();
-    }
 
     private void Update()
     {

@@ -15,6 +15,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private GameObject _tripleLaserPrefab;
     [SerializeField] private GameObject _laserContainer;
     [SerializeField] private GameObject _playerShield;
+    [SerializeField] private GameObject _fireOnLeftWing, _fireOnRightWing;
     [SerializeField] private float _fireRate = 0.25f;
     private float _nextFire = 0.0f;
     private float _xMaxPosition = 9.5f;
@@ -94,10 +95,21 @@ public class PlayerController : MonoBehaviour
         _lives--;
         _uiManager.UpdateLivesStatus(_lives);
 
-        if (_lives <= 0)
+        switch(_lives)
         {
-            Destroy(this.gameObject);
-            _gameManager.GameOver();
+            case 3:
+                break;
+            case 2:
+                _fireOnRightWing.SetActive(true);
+                break;
+            case 1:
+                _fireOnLeftWing.SetActive(true);
+                break;
+            case 0:
+                Destroy(this.gameObject);
+                _gameManager.GameOver();
+                break;
+            
         }    
         
     }   
