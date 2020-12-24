@@ -1,11 +1,14 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class EnemyController : MonoBehaviour
 {
     [SerializeField] private float _enemySpeed = 3.0f;
     [SerializeField] private int _enemyScoreValue;
+    [SerializeField] private GameObject _enemyLaserPrefab;
     private PlayerController _playerController;
     private Animator _destroyEnemyAnimator;
     private AudioSource _explosionSound;
@@ -13,8 +16,7 @@ public class EnemyController : MonoBehaviour
 
     // Start is called before the first frame update
     void Start()
-    {
-        
+    {      
         _playerController = GameObject.Find("Player").GetComponent<PlayerController>();
         if (_playerController == null)
         {
@@ -22,10 +24,9 @@ public class EnemyController : MonoBehaviour
         }
         _destroyEnemyAnimator = GetComponent<Animator>();
         _explosionSound = GetComponent<AudioSource>();
-        Destroy(gameObject, 4);
 
-        
-
+        InvokeRepeating("ShootLaser", 1f, Random.Range(0, 3));
+        Destroy(gameObject, 6);
        
         if (_destroyEnemyAnimator == null)
         {
@@ -38,6 +39,12 @@ public class EnemyController : MonoBehaviour
     {
         MoveEnemy();
         
+    }
+
+    private void ShootLaser()
+    {
+        GameObject firedLaser = Instantiate(_enemyLaserPrefab, transform.position, Quaternion.identity);
+        Destroy(firedLaser, 6);
     }
 
     void MoveEnemy()
@@ -54,6 +61,8 @@ public class EnemyController : MonoBehaviour
             _destroyEnemyAnimator.SetTrigger("IsEnemyDestroyed");
 
             _explosionSound.Play();
+            Destroy(GetComponent<Collider2D>());
+            Destroy(GetComponent<EnemyController>());
             _enemySpeed = 0f;
             Destroy(this.gameObject, 2.8f);
             Destroy(trigger.gameObject);
@@ -64,8 +73,9 @@ public class EnemyController : MonoBehaviour
             _enemySpeed = 0f;
             _explosionSound.Play();
             _destroyEnemyAnimator.SetTrigger("IsEnemyDestroyed");
+            
             Destroy(this.gameObject, 2.8f);
-           // PlayerController _player = trigger.transform.GetComponent<PlayerController>();
+           
 
             if (_playerController != null)
             {

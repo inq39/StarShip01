@@ -7,6 +7,7 @@ TagManager:
   - Laser_Projectile
   - Enemy
   - GameManager
+  - Enemy_Laser_Projectile
   layers:
   - Default
   - TransparentFX
