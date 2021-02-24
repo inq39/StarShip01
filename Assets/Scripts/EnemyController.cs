@@ -63,17 +63,18 @@ public class EnemyController : MonoBehaviour
             _explosionSound.Play();
             Destroy(GetComponent<Collider2D>());
             Destroy(GetComponent<EnemyController>());
-            _enemySpeed = 0f;
+            _enemySpeed = 0.5f;
             Destroy(this.gameObject, 2.8f);
             Destroy(trigger.gameObject);
         }
 
         if (trigger.gameObject.CompareTag("Player"))
         {
-            _enemySpeed = 0f;
+            _enemySpeed = 0.5f;
             _explosionSound.Play();
             _destroyEnemyAnimator.SetTrigger("IsEnemyDestroyed");
-            
+            Destroy(GetComponent<Collider2D>());
+            Destroy(GetComponent<EnemyController>());
             Destroy(this.gameObject, 2.8f);
            
 
