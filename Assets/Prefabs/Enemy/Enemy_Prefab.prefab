@@ -13,8 +13,8 @@ GameObject:
   - component: {fileID: 7365138541208897363}
   - component: {fileID: 8549090212764575677}
   - component: {fileID: 3723347381096322190}
-  - component: {fileID: 2994544105495759574}
   - component: {fileID: -4024500991485640701}
+  - component: {fileID: 694706324}
   m_Layer: 0
   m_Name: Enemy_Prefab
   m_TagString: Enemy
@@ -51,6 +51,7 @@ SpriteRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -149,25 +150,6 @@ MonoBehaviour:
   _enemyScoreValue: 10
   _enemyLaserPrefab: {fileID: 7348024244183383877, guid: 05c482a6dddb1804b9b3e6e92cff79ad,
     type: 3}
---- !u!95 &2994544105495759574
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8550623365197739118}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: a3260d1ca59963949a4f8c14a62b71c8, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!82 &-4024500991485640701
 AudioSource:
   m_ObjectHideFlags: 0
@@ -264,3 +246,22 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!95 &694706324
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8550623365197739118}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: a3260d1ca59963949a4f8c14a62b71c8, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
