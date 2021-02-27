@@ -28,6 +28,7 @@ public class PlayerController : MonoBehaviour
     private bool _isShieldActive = false;
     public int PlayerScore { get; private set; }
     private AudioSource _laserShootAudioClip;
+    private Animator _playerAnimator;
 
     // Start is called before the first frame update
     void Start()
@@ -37,6 +38,7 @@ public class PlayerController : MonoBehaviour
         _uiManager = GameObject.Find("UI_Manager").GetComponent<UIManager>();
         _laserShootAudioClip = GetComponent<AudioSource>();
         PlayerScore = 0;
+        _playerAnimator = GetComponent<Animator>();
 
         if (_gameManager == null)
         {
@@ -67,8 +69,9 @@ public class PlayerController : MonoBehaviour
     {
         _playerRb.AddForce(Vector3.up * _verticalInput * Time.deltaTime * _playerVerticalSpeed);
         _playerRb.AddForce(Vector3.right * _horizontalInput * Time.deltaTime * _playerHorizontalSpeed);
-               
-        
+
+        PlayerAnimation();
+
         if (transform.position.x > _xMaxPosition)
         {
             transform.position = new Vector3(-_xMaxPosition, transform.position.y, 0);
@@ -79,6 +82,28 @@ public class PlayerController : MonoBehaviour
         }
 
         transform.position = new Vector3(transform.position.x, Mathf.Clamp(transform.position.y, _yMinPosition, _yMaxPosition), 0);
+    }
+
+    private void PlayerAnimation()
+    {
+        if (_horizontalInput < 0)
+        {
+            _playerAnimator.ResetTrigger("RollMiddle");
+            _playerAnimator.ResetTrigger("RollRight");
+            _playerAnimator.SetTrigger("RollLeft");
+        }
+        else if (_horizontalInput > 0)
+        {
+            _playerAnimator.ResetTrigger("RollLeft");
+            _playerAnimator.ResetTrigger("RollMiddle");
+            _playerAnimator.SetTrigger("RollRight");
+        }
+        else
+        { 
+            _playerAnimator.ResetTrigger("RollLeft");
+            _playerAnimator.ResetTrigger("RollRight");
+            _playerAnimator.SetTrigger("RollMiddle");
+        }
     }
 
     void ShootLaser()

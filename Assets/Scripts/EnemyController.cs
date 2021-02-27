@@ -62,7 +62,7 @@ public class EnemyController : MonoBehaviour
 
             _explosionSound.Play();
             Destroy(GetComponent<Collider2D>());
-            Destroy(GetComponent<EnemyController>());
+            CancelInvoke();
             _enemySpeed = 0.5f;
             Destroy(this.gameObject, 2.8f);
             Destroy(trigger.gameObject);
@@ -74,7 +74,7 @@ public class EnemyController : MonoBehaviour
             _explosionSound.Play();
             _destroyEnemyAnimator.SetTrigger("IsEnemyDestroyed");
             Destroy(GetComponent<Collider2D>());
-            Destroy(GetComponent<EnemyController>());
+            CancelInvoke();
             Destroy(this.gameObject, 2.8f);
            
 
