@@ -5,8 +5,8 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     private Rigidbody2D _playerRb;
-    private GameManager _gameManager;
-    private UIManager _uiManager;
+    //private GameManager _gameManager;
+    //private UIManager _uiManager;
     [SerializeField] private int _lives = 3;
     [SerializeField] private float _playerVerticalSpeed;
     [SerializeField] private float _playerHorizontalSpeed;
@@ -34,13 +34,13 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         _playerRb = GetComponent<Rigidbody2D>();
-        _gameManager = GameObject.FindWithTag("GameManager").GetComponent<GameManager>();
-        _uiManager = GameObject.Find("UI_Manager").GetComponent<UIManager>();
+        //_gameManager = GameObject.FindWithTag("GameManager").GetComponent<GameManager>();
+        //_uiManager = GameObject.Find("UI_Manager").GetComponent<UIManager>();
         _laserShootAudioClip = GetComponent<AudioSource>();
         PlayerScore = 0;
         _playerAnimator = GetComponent<Animator>();
 
-        if (_gameManager == null)
+        /*if (_gameManager == null)
         {
             Debug.LogError("The GameManager is null.");
         }
@@ -48,7 +48,7 @@ public class PlayerController : MonoBehaviour
         if (_uiManager == null)
         {
             Debug.LogError("The UIManager is null.");
-        }
+        } */
 
         if (_laserShootAudioClip == null)
         {
@@ -135,7 +135,7 @@ public class PlayerController : MonoBehaviour
         }
 
         _lives--;
-        _uiManager.UpdateLivesStatus(_lives);
+        //_uiManager.UpdateLivesStatus(_lives);
 
         switch(_lives)
         {
@@ -149,7 +149,7 @@ public class PlayerController : MonoBehaviour
                 break;
             case 0:
                 Destroy(this.gameObject);
-                _gameManager.GameOver();
+                //_gameManager.GameOver();
                 break;
             
         }    
