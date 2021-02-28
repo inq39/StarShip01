@@ -143,10 +143,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 8550623365197739118}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 27fc345959281df4cade3178a18961c5, type: 3}
+  m_Script: {fileID: 11500000, guid: e3e7d0a48e4bd134d853449d552efc9d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _enemySpeed: 2
+  _enemySpeed: 3
   _enemyScoreValue: 10
   _enemyLaserPrefab: {fileID: 7348024244183383877, guid: 05c482a6dddb1804b9b3e6e92cff79ad,
     type: 3}

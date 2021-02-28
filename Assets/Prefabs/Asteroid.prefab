@@ -10,10 +10,10 @@ GameObject:
   m_Component:
   - component: {fileID: 4086087597454727119}
   - component: {fileID: 3793684922296340019}
-  - component: {fileID: 6488333883494465707}
   - component: {fileID: 5687339443740293615}
   - component: {fileID: 6825155080929072583}
   - component: {fileID: 1055545847}
+  - component: {fileID: 8888996936097856316}
   m_Layer: 0
   m_Name: Asteroid
   m_TagString: Untagged
@@ -50,6 +50,7 @@ SpriteRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -85,21 +86,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &6488333883494465707
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2641625771479350501}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ad70e0be090a15740944cef816b4cc3e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _rotateSpeed: 6
-  _asteroidExplosionAnimation: {fileID: 6983559212438827081, guid: 7eadef1046ef0734a9983bba5669dbad,
-    type: 3}
 --- !u!50 &5687339443740293615
 Rigidbody2D:
   serializedVersion: 4
@@ -156,3 +142,18 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &8888996936097856316
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2641625771479350501}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 529e8ee4423e61b478c4ce4c60539528, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _rotateSpeed: 7
+  _asteroidExplosionAnimation: {fileID: 6983559212438827081, guid: 7eadef1046ef0734a9983bba5669dbad,
+    type: 3}

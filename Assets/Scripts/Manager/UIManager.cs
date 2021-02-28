@@ -9,7 +9,6 @@ namespace StarShip01.Manager
     public class UIManager : MonoSingleton<UIManager>
     {
         [SerializeField] private TextMeshProUGUI _scoreText;
-        [SerializeField] private PlayerController _playerController;
         [SerializeField] private Image _playerStatus;
         [SerializeField] private Sprite[] _playerLives;
         [SerializeField] private TextMeshProUGUI _gameOverText;
@@ -22,26 +21,20 @@ namespace StarShip01.Manager
             _restartLevelText.gameObject.SetActive(false);
         }
 
-        void Update()
+        public void UpdateScoreText()
         {
-            UpdateScoreText();
+            _scoreText.SetText("Score: " + GameManager.Instance.Score.ToString());
         }
 
-        void UpdateScoreText()
+        public void UpdateLivesStatus()
         {
-            int newScore = _playerController.PlayerScore;
-            _scoreText.SetText("Score: " + newScore);
+            _playerStatus.sprite = _playerLives[GameManager.Instance.Lives];
         }
 
-        public void UpdateLivesStatus(int currentPlayerLives)
+        public void SetGameOverText()
         {
-            _playerStatus.sprite = _playerLives[currentPlayerLives];
-
-            if (currentPlayerLives == 0)
-            {
-                _gameOverText.gameObject.SetActive(true);
-                _restartLevelText.gameObject.SetActive(true);
-            }
+            _gameOverText.gameObject.SetActive(true);
+            _restartLevelText.gameObject.SetActive(true);
         }
     }
 }
