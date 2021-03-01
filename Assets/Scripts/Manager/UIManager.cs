@@ -10,7 +10,7 @@ namespace StarShip01.Manager
     {
         [SerializeField] private TextMeshProUGUI _scoreText;
         [SerializeField] private Image _playerStatus;
-        [SerializeField] private Sprite[] _playerLives;
+        [SerializeField] private Sprite[] _playerLiveSprites;
         [SerializeField] private TextMeshProUGUI _gameOverText;
         [SerializeField] private TextMeshProUGUI _restartLevelText;
 
@@ -28,7 +28,7 @@ namespace StarShip01.Manager
 
         public void UpdateLivesStatus()
         {
-            _playerStatus.sprite = _playerLives[GameManager.Instance.Lives];
+            _playerStatus.sprite = _playerLiveSprites[GameManager.Instance.Lives];
         }
 
         public void SetGameOverText()

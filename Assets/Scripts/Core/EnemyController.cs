@@ -9,10 +9,10 @@ namespace StarShip01.Core
         [SerializeField] private float _enemySpeed = 3.0f;
         [SerializeField] private int _enemyScoreValue;
         [SerializeField] private GameObject _enemyLaserPrefab;
+        [SerializeField] private float _standardDestroyTime; // 6f
         private PlayerController _playerController;
         private Animator _destroyEnemyAnimator;
         private AudioSource _explosionSound;
-
 
         void Start()
         {
@@ -21,16 +21,17 @@ namespace StarShip01.Core
             {
                 Debug.LogError("Player is NULL.");
             }
+
             _destroyEnemyAnimator = GetComponent<Animator>();
-            _explosionSound = GetComponent<AudioSource>();
-
-            InvokeRepeating("ShootLaser", 1f, Random.Range(0, 3));
-            Destroy(gameObject, 6);
-
             if (_destroyEnemyAnimator == null)
             {
                 Debug.LogError("Animator is NULL.");
             }
+
+            _explosionSound = GetComponent<AudioSource>();
+
+            InvokeRepeating("ShootLaser", 1f, Random.Range(0, 3));
+            Destroy(gameObject, _standardDestroyTime);
         }
 
         void FixedUpdate()
@@ -41,7 +42,7 @@ namespace StarShip01.Core
         private void ShootLaser()
         {
             GameObject firedLaser = Instantiate(_enemyLaserPrefab, transform.position, Quaternion.identity);
-            Destroy(firedLaser, 6);
+            Destroy(firedLaser, _standardDestroyTime);
         }
 
         void MoveEnemy()
@@ -49,37 +50,34 @@ namespace StarShip01.Core
             transform.Translate(Vector3.down * Time.deltaTime * _enemySpeed);
         }
 
-
         private void OnTriggerEnter2D(Collider2D trigger)
         {
-            if (trigger.gameObject.CompareTag("Laser_Projectile"))
+            if (trigger.gameObject.CompareTag("Laser_Projectile")) // hit by player_laser with score
             {
                 GameManager.Instance.UpdateScore(_enemyScoreValue);
-                _destroyEnemyAnimator.SetTrigger("IsEnemyDestroyed");
-
-                _explosionSound.Play();
-                Destroy(GetComponent<Collider2D>());
-                CancelInvoke();
-                _enemySpeed = 0.5f;
-                Destroy(this.gameObject, 2.8f);
                 Destroy(trigger.gameObject);
+                DestroyEnemy();
             }
 
-            if (trigger.gameObject.CompareTag("Player"))
+            if (trigger.gameObject.CompareTag("Player")) // collision with player without score
             {
-                _enemySpeed = 0.5f;
-                _explosionSound.Play();
-                _destroyEnemyAnimator.SetTrigger("IsEnemyDestroyed");
-                Destroy(GetComponent<Collider2D>());
-                CancelInvoke();
-                Destroy(this.gameObject, 2.8f);
-
+                DestroyEnemy();
 
                 if (_playerController != null)
                 {
                     _playerController.DestroyLive();
                 }
             }
+        }
+
+        private void DestroyEnemy()
+        {
+            Destroy(GetComponent<Collider2D>());
+            _destroyEnemyAnimator.SetTrigger("IsEnemyDestroyed");
+            _enemySpeed = 0.5f;
+            _explosionSound.Play();
+            CancelInvoke();
+            Destroy(this.gameObject, 2.8f);
         }
     }
 }

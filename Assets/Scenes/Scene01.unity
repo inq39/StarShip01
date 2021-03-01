@@ -1417,7 +1417,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _playerVerticalSpeed: 500
   _playerHorizontalSpeed: 1000
-  _speedBoostMultiplier: 1.7
+  _speedBoostMultiplier: 1.3
+  _fireRate: 0.25
+  _xMaxPosition: 9.5
+  _yMinPosition: -3
+  _yMaxPosition: 0
   _laserPrefab: {fileID: 7348024244183383877, guid: 9b69d979ad380a042807714394c0b736,
     type: 3}
   _tripleLaserPrefab: {fileID: 664990262617346013, guid: 5548ebc3ad3706f48b158343c96948c4,
@@ -1426,7 +1430,8 @@ MonoBehaviour:
   _playerShield: {fileID: 1120551877}
   _fireOnLeftWing: {fileID: 1626772487}
   _fireOnRightWing: {fileID: 1484751204}
-  _fireRate: 0.25
+  _playerExplosionAnimation: {fileID: 6983559212438827081, guid: 8fe1a18a328f70145a5feef6506df955,
+    type: 3}
 --- !u!212 &1246623648
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1820,7 +1825,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _scoreText: {fileID: 1382799457}
   _playerStatus: {fileID: 1705940519}
-  _playerLives: []
+  _playerLiveSprites:
+  - {fileID: 21300000, guid: ba53e111f0125654cabfd4eefaf3a657, type: 3}
+  - {fileID: 21300000, guid: 80fba5ece7697c44eacc036539c1b552, type: 3}
+  - {fileID: 21300000, guid: 482c8e4c0346b704aa5f1760c3c989d5, type: 3}
+  - {fileID: 21300000, guid: 9fe6f40efddf0b64fb68a3382b14a4db, type: 3}
   _gameOverText: {fileID: 623711177}
   _restartLevelText: {fileID: 1425113008}
 --- !u!4 &1414033972

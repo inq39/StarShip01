@@ -6,38 +6,47 @@ namespace StarShip01.Core
 {
     public class PlayerController : MonoBehaviour
     {
-        private Rigidbody2D _playerRb;
+        [Header("Values")]     
         [SerializeField] private float _playerVerticalSpeed;
         [SerializeField] private float _playerHorizontalSpeed;
         [SerializeField] private float _speedBoostMultiplier;
+        [SerializeField] private float _fireRate; // 0.25f
+        [SerializeField] private float _xMaxPosition = 9.5f; // 9.5f
+        [SerializeField] private float _yMinPosition = -4.0f; // -4.0f
+        [SerializeField] private float _yMaxPosition = -1.0f; // -1.0f
+
+        [Header("Prefabs and Container")]
         [SerializeField] private GameObject _laserPrefab;
         [SerializeField] private GameObject _tripleLaserPrefab;
         [SerializeField] private GameObject _laserContainer;
         [SerializeField] private GameObject _playerShield;
         [SerializeField] private GameObject _fireOnLeftWing, _fireOnRightWing;
-        [SerializeField] private float _fireRate = 0.25f;
+        [SerializeField] private GameObject _playerExplosionAnimation;
+
         private float _nextFire = 0.0f;
-        private float _xMaxPosition = 9.5f;
-        private float _yMinPosition = -4.0f;
-        private float _yMaxPosition = -1.0f;
         private float _horizontalInput;
         private float _verticalInput;
         private bool _isTripleShotActive = false;
         private bool _isSpeedBoostActive = false;
         private bool _isShieldActive = false;
+
+        private Rigidbody2D _playerRb;
         private AudioSource _laserShootAudioClip;
         private Animator _playerAnimator;
 
         void Start()
         {
             _playerRb = GetComponent<Rigidbody2D>();
-            _laserShootAudioClip = GetComponent<AudioSource>();
-            _playerAnimator = GetComponent<Animator>();
+            if (_playerRb == null)          
+                Debug.LogError("The Player_RB on the Player is null.");           
 
+            _playerAnimator = GetComponent<Animator>();
+            if (_playerAnimator == null)
+                Debug.LogError("The Player Animator on the Player is null.");          
+
+            _laserShootAudioClip = GetComponent<AudioSource>();
             if (_laserShootAudioClip == null)
-            {
                 Debug.LogError("The AudioSource on the Player is null.");
-            }
         }
 
         void Update()
@@ -129,7 +138,10 @@ namespace StarShip01.Core
                     _fireOnLeftWing.SetActive(true);
                     break;
                 case 0:
-                    Destroy(this.gameObject);
+                    Destroy(GetComponent<Collider2D>());
+                    Instantiate(_playerExplosionAnimation, transform.position, Quaternion.identity);
+                    this.gameObject.SetActive(false);
+                    //Destroy(this.gameObject, 0.15f);
                     break;
             }
         }

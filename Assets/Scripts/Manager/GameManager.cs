@@ -23,13 +23,15 @@ namespace StarShip01.Manager
         {
             if (_isGameOver && Input.GetKeyDown(KeyCode.R))
             {
-                SceneManager.LoadScene(0);
+                SceneManager.LoadScene(1);
             }
         }
 
         public void StartGame()
         {
             SpawnManager.Instance.StartSpawning();
+            SpawnManager.Instance.ActivateContainer();
+            _lives = 3;
         }
 
         public void GameOver()
@@ -48,13 +50,13 @@ namespace StarShip01.Manager
 
         public void UpdateLives()
         {
-            _lives--; 
+            _lives--;
             UIManager.Instance.UpdateLivesStatus();
+            
             if (_lives <= 0)
             {
                 GameOver();
             }
         }
-
     }
 }

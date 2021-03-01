@@ -61,5 +61,11 @@ namespace StarShip01.Manager
             _powerUpContainer.SetActive(false);
             _laserContainer.SetActive(false);
         }
+        public void ActivateContainer()
+        {
+            _enemyContainer.SetActive(true);
+            _powerUpContainer.SetActive(true);
+            _laserContainer.SetActive(true);
+        }
     }
 }
