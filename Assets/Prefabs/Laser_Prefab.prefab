@@ -146,3 +146,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _laserSpeed: 20
   _laserDestroyTime: 5
+  _laserContainer: {fileID: 1138149685512893448, guid: 8b300d126eaad2f44894559d8eec884c,
+    type: 3}

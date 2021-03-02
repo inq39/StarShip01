@@ -41,7 +41,7 @@ namespace StarShip01.Core
 
         private void ShootLaser()
         {
-            GameObject firedLaser = Instantiate(_enemyLaserPrefab, transform.position, Quaternion.identity);
+            GameObject firedLaser = Instantiate(_enemyLaserPrefab, transform.position, Quaternion.identity);            
             Destroy(firedLaser, _standardDestroyTime);
         }
 

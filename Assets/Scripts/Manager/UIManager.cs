@@ -17,6 +17,11 @@ namespace StarShip01.Manager
         // Update is called once per frame
         void Start()
         {
+            StartNewLevel();
+        }
+
+        public void StartNewLevel()
+        {
             _gameOverText.gameObject.SetActive(false);
             _restartLevelText.gameObject.SetActive(false);
         }

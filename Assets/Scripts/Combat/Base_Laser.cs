@@ -9,6 +9,7 @@ namespace StarShip01.Combat
         [SerializeField] protected float _laserSpeed = 20.0f;
         [SerializeField] private float _laserDestroyTime = 5.0f;
 
+
         private void Start()
         {
             Destroy(this.gameObject, _laserDestroyTime);

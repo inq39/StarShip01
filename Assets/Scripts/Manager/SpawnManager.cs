@@ -7,10 +7,10 @@ namespace StarShip01.Manager
     public class SpawnManager : MonoSingleton<SpawnManager>
     {
         [SerializeField] private GameObject _enemyPrefab; //more enemies with Array like PowerUps
-        [SerializeField] private GameObject _enemyContainer;
+        //[SerializeField] private GameObject _enemyContainer;
         [SerializeField] private GameObject[] _powerUpPrefab;
-        [SerializeField] private GameObject _powerUpContainer;
-        [SerializeField] private GameObject _laserContainer;
+        //[SerializeField] private GameObject _powerUpContainer;
+        //[SerializeField] private GameObject _laserContainer;
 
         private float _spawnPositionMaxX = 8.0f;
         private float _spawnPositionY = 7.0f;
@@ -26,7 +26,7 @@ namespace StarShip01.Manager
             {
                 yield return new WaitForSeconds(Random.Range(_minSecondsEnemiesSpawn, _maxSecondsEnemiesSpawn));
                 GameObject _newEnemy = Instantiate(_enemyPrefab, CalculateRandomSpawnPosition(), Quaternion.identity);
-                _newEnemy.transform.parent = _enemyContainer.transform;
+                //_newEnemy.transform.parent = _enemyContainer.transform;
             }
         }
 
@@ -39,7 +39,7 @@ namespace StarShip01.Manager
                 int randomPrefab = Random.Range(0, _powerUpPrefab.Length);
 
                 GameObject _newPowerUp = Instantiate(_powerUpPrefab[randomPrefab], CalculateRandomSpawnPosition(), Quaternion.identity);
-                _newPowerUp.transform.parent = _powerUpContainer.transform;
+                //_newPowerUp.transform.parent = _powerUpContainer.transform;
             }
         }
 
@@ -55,7 +55,7 @@ namespace StarShip01.Manager
             return new Vector3(_spawnPositionX, _spawnPositionY, 0);
         }
 
-        public void DeactivateContainer()
+        /*public void DeactivateContainer()
         {
             _enemyContainer.SetActive(false);
             _powerUpContainer.SetActive(false);
@@ -66,6 +66,6 @@ namespace StarShip01.Manager
             _enemyContainer.SetActive(true);
             _powerUpContainer.SetActive(true);
             _laserContainer.SetActive(true);
-        }
+        } */
     }
 }

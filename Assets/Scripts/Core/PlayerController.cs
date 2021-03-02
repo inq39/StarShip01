@@ -18,7 +18,7 @@ namespace StarShip01.Core
         [Header("Prefabs and Container")]
         [SerializeField] private GameObject _laserPrefab;
         [SerializeField] private GameObject _tripleLaserPrefab;
-        [SerializeField] private GameObject _laserContainer;
+        //[SerializeField] private GameObject _laserContainer;
         [SerializeField] private GameObject _playerShield;
         [SerializeField] private GameObject _fireOnLeftWing, _fireOnRightWing;
         [SerializeField] private GameObject _playerExplosionAnimation;
@@ -104,13 +104,13 @@ namespace StarShip01.Core
             {
                 if (_isTripleShotActive)
                 {
-                    GameObject _tripleLaser = Instantiate(_tripleLaserPrefab, transform.position + new Vector3(-0.1f, 0.0f, 0), Quaternion.identity);
-                    _tripleLaser.transform.parent = _laserContainer.transform;
+                    GameObject tripleLaser = Instantiate(_tripleLaserPrefab, transform.position + new Vector3(-0.1f, 0.0f, 0), Quaternion.identity);
+                    //tripleLaser.transform.parent = _laserContainer.transform;
                 }
                 else
                 {
-                    GameObject _laser = Instantiate(_laserPrefab, transform.position + new Vector3(0.0f, 0.0f, 0), Quaternion.identity);
-                    _laser.transform.parent = _laserContainer.transform;
+                    GameObject laser = Instantiate(_laserPrefab, transform.position + new Vector3(0.0f, 0.0f, 0), Quaternion.identity);
+                    //laser.transform.parent = _laserContainer.transform;
                 }
                 _nextFire = Time.time + _fireRate;
                 _laserShootAudioClip.Play();
@@ -140,8 +140,8 @@ namespace StarShip01.Core
                 case 0:
                     Destroy(GetComponent<Collider2D>());
                     Instantiate(_playerExplosionAnimation, transform.position, Quaternion.identity);
-                    this.gameObject.SetActive(false);
-                    //Destroy(this.gameObject, 0.15f);
+                    //this.gameObject.SetActive(false);
+                    Destroy(this.gameObject, 0.15f);
                     break;
             }
         }

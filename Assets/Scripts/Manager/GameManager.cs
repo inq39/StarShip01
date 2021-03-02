@@ -7,7 +7,7 @@ namespace StarShip01.Manager
     {      
         private bool _isGameOver;
         public bool IsGameOver { get { return _isGameOver; } }
-        private int _score;
+        private int _score = 0;
         public int Score { get { return _score; } }
         //private float _playTime;
         //private float _bestTime;
@@ -23,21 +23,25 @@ namespace StarShip01.Manager
         {
             if (_isGameOver && Input.GetKeyDown(KeyCode.R))
             {
-                SceneManager.LoadScene(1);
+                SceneManager.LoadSceneAsync(1);
+                ResetLevel();
             }
         }
 
-        public void StartGame()
+        private void ResetLevel()
         {
-            SpawnManager.Instance.StartSpawning();
-            SpawnManager.Instance.ActivateContainer();
             _lives = 3;
+            _score = 0;
+            _isGameOver = false;
+            UIManager.Instance.StartNewLevel();
+            UIManager.Instance.UpdateScoreText();
+            UIManager.Instance.UpdateLivesStatus();
         }
 
         public void GameOver()
         {
             _isGameOver = true;
-            SpawnManager.Instance.DeactivateContainer();
+            SpawnManager.Instance.StopAllCoroutines();
             UIManager.Instance.SetGameOverText();
         }
 

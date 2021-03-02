@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using StarShip01.Manager;
 
 namespace StarShip01.Core
@@ -19,10 +17,10 @@ namespace StarShip01.Core
         {
             if (other.tag == "Laser_Projectile")
             {
-                _rotateSpeed = 0f;
+                _rotateSpeed *= 0.1f;
                 Instantiate(_asteroidExplosionAnimation, transform.position, Quaternion.identity);
 
-                GameManager.Instance.StartGame();
+                SpawnManager.Instance.StartSpawning();
                 Destroy(other.gameObject);
                 Destroy(this.gameObject, 0.15f);
             }
