@@ -739,38 +739,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1382799457, guid: 7d8027e86c7ed3a4f8dfefbc29c41c32, type: 3}
-      propertyPath: m_text
-      value: 'Score: 0'
-      objectReference: {fileID: 0}
-    - target: {fileID: 1382799457, guid: 7d8027e86c7ed3a4f8dfefbc29c41c32, type: 3}
-      propertyPath: m_margin.z
-      value: -39.9541
-      objectReference: {fileID: 0}
-    - target: {fileID: 1382799459, guid: 7d8027e86c7ed3a4f8dfefbc29c41c32, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 160
-      objectReference: {fileID: 0}
-    - target: {fileID: 1382799459, guid: 7d8027e86c7ed3a4f8dfefbc29c41c32, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: -160
-      objectReference: {fileID: 0}
-    - target: {fileID: 1382799459, guid: 7d8027e86c7ed3a4f8dfefbc29c41c32, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: -75
-      objectReference: {fileID: 0}
-    - target: {fileID: 1705940521, guid: 7d8027e86c7ed3a4f8dfefbc29c41c32, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 2.35
-      objectReference: {fileID: 0}
-    - target: {fileID: 1705940521, guid: 7d8027e86c7ed3a4f8dfefbc29c41c32, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 160
-      objectReference: {fileID: 0}
-    - target: {fileID: 1705940521, guid: 7d8027e86c7ed3a4f8dfefbc29c41c32, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: -100
-      objectReference: {fileID: 0}
     - target: {fileID: 1781829013982791985, guid: 7d8027e86c7ed3a4f8dfefbc29c41c32,
         type: 3}
       propertyPath: m_RootOrder
@@ -912,7 +880,7 @@ PrefabInstance:
     - target: {fileID: 6861453268814531168, guid: 79400a73c51c4d240951cb3a541908cf,
         type: 3}
       propertyPath: m_RootOrder
-      value: 10
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 6861453268814531168, guid: 79400a73c51c4d240951cb3a541908cf,
         type: 3}
@@ -981,7 +949,7 @@ PrefabInstance:
     - target: {fileID: 8289144205745495188, guid: 019e1accdc062ff43bf44f713ca4ef2e,
         type: 3}
       propertyPath: m_RootOrder
-      value: 9
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 8289144205745495188, guid: 019e1accdc062ff43bf44f713ca4ef2e,
         type: 3}

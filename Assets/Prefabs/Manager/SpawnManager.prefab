@@ -1,5 +1,65 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1922735112
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1922735113}
+  m_Layer: 0
+  m_Name: EnemyContainer
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1922735113
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1922735112}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 6861453268814531168}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2004865263
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2004865264}
+  m_Layer: 0
+  m_Name: PowerUpContainer
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2004865264
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2004865263}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 6861453268814531168}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6861453268814531170
 GameObject:
   m_ObjectHideFlags: 0
@@ -27,7 +87,9 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 1922735113}
+  - {fileID: 2004865264}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -43,12 +105,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 07e3e388f6d80aa40a7a2a9f6366b1e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _enemyPrefab: {fileID: 8550623365197739118, guid: 98f13057ff74f1a4a974f13d8c192f80,
-    type: 3}
+  _enemyPrefab:
+  - {fileID: 8550623365197739118, guid: 98f13057ff74f1a4a974f13d8c192f80, type: 3}
+  - {fileID: 8550623365197739118, guid: 98f13057ff74f1a4a974f13d8c192f80, type: 3}
+  - {fileID: 8550623365197739118, guid: 98f13057ff74f1a4a974f13d8c192f80, type: 3}
+  _enemyPoolSize: 10
+  _enemyPool: []
+  _enemyContainer: {fileID: 1922735112}
   _powerUpPrefab:
   - {fileID: 157715233440618129, guid: d2c76ed36f4f63747b4977f1c613f6db, type: 3}
   - {fileID: 2650095103202526885, guid: 5190b959cb975af4aa418b1a63335f3d, type: 3}
   - {fileID: 6214741721136554170, guid: 39db54c7d92679d4eb20533b84f8e4b8, type: 3}
+  _powerUpPoolSize: 10
+  _powerUpPool: []
+  _powerUpContainer: {fileID: 2004865263}
   _minSecondsEnemiesSpawn: 2
   _maxSecondsEnemiesSpawn: 4
   _minSecondsPowerUpsSpawn: 3

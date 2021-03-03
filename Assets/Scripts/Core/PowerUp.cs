@@ -21,7 +21,7 @@ namespace StarShip01.Core
 
             if (transform.position.y < _positionMinY)
             {
-                Destroy(this.gameObject);
+                this.gameObject.SetActive(false);
             }
         }
 
@@ -30,7 +30,7 @@ namespace StarShip01.Core
             if (collision.gameObject.CompareTag("Player"))
             {
                 AudioSource.PlayClipAtPoint(_powerUpAudioClip, transform.position);
-                Destroy(this.gameObject);
+                this.gameObject.SetActive(false);
 
                 if (_playerController != null)
                 {

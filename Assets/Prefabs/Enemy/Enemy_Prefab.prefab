@@ -151,8 +151,6 @@ MonoBehaviour:
   _enemyLaserPrefab: {fileID: 7348024244183383877, guid: a1490d6306999e44680ec8ba00815464,
     type: 3}
   _standardDestroyTime: 6
-  _laserContainer: {fileID: 1138149685512893448, guid: 8b300d126eaad2f44894559d8eec884c,
-    type: 3}
 --- !u!82 &-4024500991485640701
 AudioSource:
   m_ObjectHideFlags: 0

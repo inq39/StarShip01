@@ -138,7 +138,7 @@ namespace StarShip01.Core
                     _fireOnLeftWing.SetActive(true);
                     break;
                 case 0:
-                    Destroy(GetComponent<Collider2D>());
+                    GetComponent<Collider2D>().enabled = false;
                     Instantiate(_playerExplosionAnimation, transform.position, Quaternion.identity);
                     //this.gameObject.SetActive(false);
                     Destroy(this.gameObject, 0.15f);
