@@ -4,7 +4,7 @@ namespace StarShip01.Core
 {
     public class PowerUp : MonoBehaviour
     {
-        [SerializeField] private float _powerUpSpeed = 3.0f;
+        [SerializeField] private float _powerUpSpeed; // 3.0f
         [SerializeField] private int _powerupID;
         public int PowerUpID { get { return _powerupID; } }
         private PlayerController _playerController;

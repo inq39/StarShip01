@@ -6,6 +6,7 @@ namespace StarShip01.Core
     public class Asteroid : MonoBehaviour
     {
         [SerializeField] private float _rotateSpeed = 6.0f;
+        [SerializeField] private float _speedFactorCollision = 0.2f;
         [SerializeField] private GameObject _asteroidExplosionAnimation;
 
         void Update()
@@ -17,7 +18,7 @@ namespace StarShip01.Core
         {
             if (other.tag == "Laser_Projectile")
             {
-                _rotateSpeed *= 0.1f;
+                _rotateSpeed *= _speedFactorCollision;
                 Instantiate(_asteroidExplosionAnimation, transform.position, Quaternion.identity);
 
                 SpawnManager.Instance.StartSpawning();

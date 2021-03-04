@@ -28,6 +28,7 @@ namespace StarShip01.Core
 
         private void OnEnable()
         {
+            GetComponent<SpriteRenderer>().sprite = _defaultSprite;
             _speedFactor = 1.0f;
             InvokeRepeating("ShootLaser", 1f, Random.Range(0, 3));
             Invoke("SetEnemyInactive", _returnToPoolTime);
@@ -87,9 +88,14 @@ namespace StarShip01.Core
 
         private void SetInactive()
         {
-            GetComponent<SpriteRenderer>().sprite = _defaultSprite;
+            SetSprite();
             GetComponent<Collider2D>().enabled = true;
             this.gameObject.SetActive(false);
+        }
+
+        public void SetSprite()
+        {
+            GetComponent<SpriteRenderer>().sprite = _defaultSprite;
         }
     }
 }

@@ -49,6 +49,7 @@ namespace StarShip01.Manager
         {
             _isGameOver = true;
             SpawnManager.Instance.StopAllCoroutines();
+            SpawnManager.Instance.SetAllListsInactive();
             UIManager.Instance.SetGameOverText();
         }
 

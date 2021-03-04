@@ -1,3 +1,4 @@
+using StarShip01.Core;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -53,6 +54,37 @@ namespace StarShip01.Manager
             _playerLaserPool = GeneratePlayerLaserPool();
             _tripleLaserPool = GenerateTripleLaserPool();
             _enemyLaserPool = GenerateEnemyLaserPool();
+        }
+
+        public void SetAllListsInactive()
+        {
+            //todo: implementing nested list
+
+            foreach (var powerUp in _powerUpPool)
+            {
+                powerUp.SetActive(false);
+            }
+
+            foreach (var enemy in _enemyPool)
+            {
+                enemy.GetComponent<EnemyController>().SetSprite();
+                enemy.SetActive(false);
+            }
+
+            foreach (var playerLaser in _playerLaserPool)
+            {
+                playerLaser.SetActive(false);
+            }
+
+            foreach (var tripleLaser in _tripleLaserPool)
+            {
+                tripleLaser.SetActive(false);
+            }
+
+            foreach (var enemyLaser in _enemyLaserPool)
+            {
+                enemyLaser.SetActive(false);
+            }
         }
 
         private List<GameObject> GeneratePowerUpPool()
