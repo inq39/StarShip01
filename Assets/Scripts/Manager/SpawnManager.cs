@@ -16,10 +16,26 @@ namespace StarShip01.Manager
         [SerializeField] private int _powerUpPoolSize;
         [SerializeField] private List<GameObject> _powerUpPool;
         [SerializeField] private GameObject _powerUpContainer;
+        [Header("Player Laser")]
+        [SerializeField] private GameObject _playerLaserPrefab;
+        [SerializeField] private int _playerLaserPoolSize;
+        [SerializeField] private List<GameObject> _playerLaserPool;
+        [SerializeField] private GameObject _playerLaserContainer;
+        [Header("Player Triple Laser")]
+        [SerializeField] private GameObject _tripleLaserPrefab;
+        [SerializeField] private int _tripleLaserPoolSize;
+        [SerializeField] private List<GameObject> _tripleLaserPool;
+        [SerializeField] private GameObject _tripleLaserContainer;
+        [Header("Enemy Laser")]
+        [SerializeField] private GameObject _enemyLaserPrefab;
+        [SerializeField] private int _enemyLaserPoolSize;
+        [SerializeField] private List<GameObject> _enemyLaserPool;
+        [SerializeField] private GameObject _enemyLaserContainer;
 
         private float _spawnPositionMaxX = 8.0f;
         private float _spawnPositionY = 7.0f;
 
+        [Header("Spawn Values")]
         [SerializeField] private int _minSecondsEnemiesSpawn = 2;
         [SerializeField] private int _maxSecondsEnemiesSpawn = 4;
         [SerializeField] private int _minSecondsPowerUpsSpawn = 3;
@@ -27,8 +43,16 @@ namespace StarShip01.Manager
 
         private void Start()
         {
-            _enemyPool = GenerateEnemyPool();
+            GeneratePools();
+        }
+
+        public void GeneratePools()
+        {
             _powerUpPool = GeneratePowerUpPool();
+            _enemyPool = GenerateEnemyPool();
+            _playerLaserPool = GeneratePlayerLaserPool();
+            _tripleLaserPool = GenerateTripleLaserPool();
+            _enemyLaserPool = GenerateEnemyLaserPool();
         }
 
         private List<GameObject> GeneratePowerUpPool()
@@ -42,6 +66,23 @@ namespace StarShip01.Manager
                 _powerUpPool.Add(newPowerUp);
             }
             return _powerUpPool;
+        }
+
+        private GameObject RequestPowerUp()
+        {
+            foreach (GameObject powerUp in _powerUpPool)
+            {
+                if (powerUp.activeInHierarchy == false)
+                {
+                    powerUp.SetActive(true);
+                    return powerUp;
+                }
+            }
+            int randomPrefab = Random.Range(0, _powerUpPrefab.Length);
+            GameObject newPowerUp = Instantiate(_powerUpPrefab[randomPrefab]);
+            newPowerUp.transform.parent = _powerUpContainer.transform;
+            _powerUpPool.Add(newPowerUp);
+            return newPowerUp;
         }
 
         private List<GameObject> GenerateEnemyPool()
@@ -74,21 +115,88 @@ namespace StarShip01.Manager
             return newEnemy;
         }
 
-        private GameObject RequestPowerUp()
+        private List<GameObject> GeneratePlayerLaserPool()
         {
-            foreach (GameObject powerUp in _powerUpPool)
+            for (int i = 0; i < _playerLaserPoolSize; i++)
             {
-                if (powerUp.activeInHierarchy == false)
+                GameObject newPlayerLaser = Instantiate(_playerLaserPrefab);
+                newPlayerLaser.transform.parent = _playerLaserContainer.transform;
+                newPlayerLaser.SetActive(false);
+                _playerLaserPool.Add(newPlayerLaser);
+            }
+            return _playerLaserPool;
+        }
+
+        public GameObject RequestPlayerLaser()
+        {
+            foreach (GameObject playerLaser in _playerLaserPool)
+            {
+                if (playerLaser.activeInHierarchy == false)
                 {
-                    powerUp.SetActive(true);
-                    return powerUp;
+                    playerLaser.SetActive(true);
+                    return playerLaser;
                 }
             }
-            int randomPrefab = Random.Range(0, _powerUpPrefab.Length);
-            GameObject newPowerUp = Instantiate(_powerUpPrefab[randomPrefab]);
-            newPowerUp.transform.parent = _powerUpContainer.transform;
-            _powerUpPool.Add(newPowerUp);
-            return newPowerUp;
+            GameObject newPlayerLaser = Instantiate(_playerLaserPrefab);
+            newPlayerLaser.transform.parent = _playerLaserContainer.transform;
+            _playerLaserPool.Add(newPlayerLaser);
+            return newPlayerLaser;
+        }
+
+        private List<GameObject> GenerateTripleLaserPool()
+        {
+            for (int i = 0; i < _tripleLaserPoolSize; i++)
+            {
+                GameObject newTripleLaser = Instantiate(_tripleLaserPrefab);
+                newTripleLaser.transform.parent = _tripleLaserContainer.transform;
+                newTripleLaser.SetActive(false);
+                _tripleLaserPool.Add(newTripleLaser);
+            }
+            return _tripleLaserPool;
+        }
+
+        public GameObject RequestTripleLaser()
+        {
+            foreach (GameObject tripleLaser in _tripleLaserPool)
+            {
+                if (tripleLaser.activeInHierarchy == false)
+                {
+                    tripleLaser.SetActive(true);
+                    return tripleLaser;
+                }
+            }
+            GameObject newTripleLaser = Instantiate(_tripleLaserPrefab);
+            newTripleLaser.transform.parent = _tripleLaserContainer.transform;
+            _tripleLaserPool.Add(newTripleLaser);
+            return newTripleLaser;
+        }
+
+        private List<GameObject> GenerateEnemyLaserPool()
+        {
+            for (int i = 0; i < _enemyLaserPoolSize; i++)
+            {
+                GameObject newEnemyLaser = Instantiate(_enemyLaserPrefab);
+                newEnemyLaser.transform.parent = _enemyLaserContainer.transform;
+                newEnemyLaser.SetActive(false);
+                _enemyLaserPool.Add(newEnemyLaser);
+            }
+            return _enemyLaserPool;
+        }
+
+        public GameObject RequestEnemyLaser()
+        {
+            foreach (GameObject enemyLaser in _enemyLaserPool)
+            {
+                if (enemyLaser.activeInHierarchy == false)
+                {
+                    enemyLaser.SetActive(true);
+                    return enemyLaser;
+                }
+            }
+            GameObject newEnemyLaser = Instantiate(_enemyLaserPrefab);
+            newEnemyLaser.transform.parent = _enemyLaserContainer.transform;
+            _enemyLaserPool.Add(newEnemyLaser);
+            return newEnemyLaser;
         }
 
         IEnumerator SpawnEnemies()

@@ -10,6 +10,8 @@ namespace StarShip01.Core
         [SerializeField] private float _playerVerticalSpeed;
         [SerializeField] private float _playerHorizontalSpeed;
         [SerializeField] private float _speedBoostMultiplier;
+        [SerializeField] private float _speedBoostDuration;
+        [SerializeField] private float _tripleShotDuration;
         [SerializeField] private float _fireRate; // 0.25f
         [SerializeField] private float _xMaxPosition = 9.5f; // 9.5f
         [SerializeField] private float _yMinPosition = -4.0f; // -4.0f
@@ -18,7 +20,6 @@ namespace StarShip01.Core
         [Header("Prefabs and Container")]
         [SerializeField] private GameObject _laserPrefab;
         [SerializeField] private GameObject _tripleLaserPrefab;
-        //[SerializeField] private GameObject _laserContainer;
         [SerializeField] private GameObject _playerShield;
         [SerializeField] private GameObject _fireOnLeftWing, _fireOnRightWing;
         [SerializeField] private GameObject _playerExplosionAnimation;
@@ -104,14 +105,17 @@ namespace StarShip01.Core
             {
                 if (_isTripleShotActive)
                 {
-                    GameObject tripleLaser = Instantiate(_tripleLaserPrefab, transform.position + new Vector3(-0.1f, 0.0f, 0), Quaternion.identity);
-                    //tripleLaser.transform.parent = _laserContainer.transform;
+                    GameObject tripleLaser = SpawnManager.Instance.RequestTripleLaser();
+                    tripleLaser.transform.position = transform.position + new Vector3(-0.1f, 0.0f, 0);
+                    tripleLaser.transform.rotation = Quaternion.identity;
                 }
                 else
                 {
-                    GameObject laser = Instantiate(_laserPrefab, transform.position + new Vector3(0.0f, 0.0f, 0), Quaternion.identity);
-                    //laser.transform.parent = _laserContainer.transform;
+                    GameObject laser = SpawnManager.Instance.RequestPlayerLaser();
+                    laser.transform.position = transform.position + new Vector3(0.0f, 0.0f, 0);
+                    laser.transform.rotation = Quaternion.identity;
                 }
+
                 _nextFire = Time.time + _fireRate;
                 _laserShootAudioClip.Play();
             }
@@ -149,28 +153,47 @@ namespace StarShip01.Core
             if (trigger.gameObject.CompareTag("Enemy_Laser_Projectile"))
             {
                 DestroyLive();
-                Destroy(trigger.gameObject);
+                trigger.gameObject.SetActive(false);
             }
             else if (trigger.gameObject.CompareTag("Enemy"))
             {
                 DestroyLive();
-            }      
+            }
+            else if (trigger.gameObject.CompareTag("PowerUp"))
+            {
+                int ID = trigger.GetComponent<PowerUp>().PowerUpID;
+                switch (ID)
+                {
+                    case 0:
+                        SetShieldActive();
+                        break;
+                    case 1:
+                        SetSpeedBoostActive();
+                        break;
+                    case 2:
+                        SetTripleShotActive();
+                        break;
+                    default:
+                        Debug.Log("default");
+                        break;
+                }
+            }
         }
 
         #region PowerUps - activation + timer
-        public void SetTripleShotActive()
+        private void SetTripleShotActive()
         {
             _isTripleShotActive = true;
-            StartCoroutine(SetPowerUpActiveTime());
+            StartCoroutine(SetTripleShotActiveTime());
         }
 
-        IEnumerator SetPowerUpActiveTime()
+        IEnumerator SetTripleShotActiveTime()
         {
-            yield return new WaitForSeconds(5.0f);
+            yield return new WaitForSeconds(_tripleShotDuration);
             _isTripleShotActive = false;
         }
 
-        public void SetSpeedBoostActive()
+        private void SetSpeedBoostActive()
         {
             _isSpeedBoostActive = true;
             _playerHorizontalSpeed *= _speedBoostMultiplier;
@@ -180,13 +203,13 @@ namespace StarShip01.Core
 
         IEnumerator SetSpeedBoostActiveTime()
         {
-            yield return new WaitForSeconds(5.0f);
+            yield return new WaitForSeconds(_speedBoostDuration);
             _isSpeedBoostActive = false;
             _playerHorizontalSpeed /= _speedBoostMultiplier;
             _speedBoostMultiplier /= _speedBoostMultiplier;
         }
 
-        public void SetShieldActive()
+        private void SetShieldActive()
         {
             _isShieldActive = true;
             _playerShield.SetActive(true);

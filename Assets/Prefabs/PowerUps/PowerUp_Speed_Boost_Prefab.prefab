@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 7082969338063702502}
   m_Layer: 0
   m_Name: PowerUp_Speed_Boost_Prefab
-  m_TagString: Untagged
+  m_TagString: PowerUp
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -98,9 +98,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2da3ceb2afa261e419211c3c3f79804d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _powerUpSpeed: 3
+  _powerUpSpeed: 4
   _powerupID: 1
   _powerUpAudioClip: {fileID: 8300000, guid: 5ee343246919d2b4bba63ae629e95494, type: 3}
+  _returnToPoolTime: 20
 --- !u!61 &6259126369964207270
 BoxCollider2D:
   m_ObjectHideFlags: 0

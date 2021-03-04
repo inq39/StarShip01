@@ -8,8 +8,7 @@ namespace StarShip01.Core
     {
         [SerializeField] private float _enemySpeed = 3.0f;
         [SerializeField] private int _enemyScoreValue;
-        [SerializeField] private GameObject _enemyLaserPrefab;
-        [SerializeField] private float _standardDestroyTime; // 6f
+        [SerializeField] private float _returnToPoolTime; // 6f
         [SerializeField] private Sprite _defaultSprite;
         private Animator _destroyEnemyAnimator;
         private AudioSource _explosionSound;
@@ -17,21 +16,21 @@ namespace StarShip01.Core
 
         void Start()
         {
-
             _destroyEnemyAnimator = GetComponent<Animator>();
-            if (_destroyEnemyAnimator == null)
-            {
+            if (_destroyEnemyAnimator == null)           
                 Debug.LogError("Animator is NULL.");
-            }
+            
 
             _explosionSound = GetComponent<AudioSource>();
+            if (_explosionSound == null)
+                Debug.LogError("ExplosionSound is NULL.");
         }
 
         private void OnEnable()
         {
             _speedFactor = 1.0f;
             InvokeRepeating("ShootLaser", 1f, Random.Range(0, 3));
-            Invoke("SetInactive", _standardDestroyTime);
+            Invoke("SetEnemyInactive", _returnToPoolTime);
         }
 
         private void OnDisable()
@@ -46,8 +45,14 @@ namespace StarShip01.Core
 
         private void ShootLaser()
         {
-            GameObject firedLaser = Instantiate(_enemyLaserPrefab, transform.position, Quaternion.identity);            
-            Destroy(firedLaser, _standardDestroyTime);
+            GameObject firedLaser = SpawnManager.Instance.RequestEnemyLaser();
+            firedLaser.transform.position = transform.position;
+            firedLaser.transform.rotation = Quaternion.identity;
+        }
+
+        private void SetEnemyInactive()
+        {
+            this.gameObject.SetActive(false);
         }
 
         void MoveEnemy()
@@ -60,7 +65,7 @@ namespace StarShip01.Core
             if (trigger.gameObject.CompareTag("Laser_Projectile")) // hit by player_laser with score
             {
                 GameManager.Instance.UpdateScore(_enemyScoreValue);
-                Destroy(trigger.gameObject);
+                trigger.gameObject.SetActive(false);
                 DestroyEnemy();
             }
 

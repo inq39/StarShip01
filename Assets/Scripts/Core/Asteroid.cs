@@ -21,7 +21,7 @@ namespace StarShip01.Core
                 Instantiate(_asteroidExplosionAnimation, transform.position, Quaternion.identity);
 
                 SpawnManager.Instance.StartSpawning();
-                Destroy(other.gameObject);
+                other.gameObject.SetActive(false);
                 Destroy(this.gameObject, 0.15f);
             }
         }

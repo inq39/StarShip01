@@ -60,6 +60,96 @@ Transform:
   m_Father: {fileID: 6861453268814531168}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1750628753188218268
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3674552387310405079}
+  m_Layer: 0
+  m_Name: TripleLaserContainer
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3674552387310405079
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1750628753188218268}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 6861453268814531168}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &4116375423243644897
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1574014287322380034}
+  m_Layer: 0
+  m_Name: PlayerLaserContainer
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1574014287322380034
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4116375423243644897}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 6861453268814531168}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &4136343919615139540
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7689864752948452924}
+  m_Layer: 0
+  m_Name: EnemyLaserContainer
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7689864752948452924
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4136343919615139540}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 6861453268814531168}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6861453268814531170
 GameObject:
   m_ObjectHideFlags: 0
@@ -90,6 +180,9 @@ Transform:
   m_Children:
   - {fileID: 1922735113}
   - {fileID: 2004865264}
+  - {fileID: 1574014287322380034}
+  - {fileID: 3674552387310405079}
+  - {fileID: 7689864752948452924}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -119,6 +212,21 @@ MonoBehaviour:
   _powerUpPoolSize: 10
   _powerUpPool: []
   _powerUpContainer: {fileID: 2004865263}
+  _playerLaserPrefab: {fileID: 7348024244183383877, guid: 9b69d979ad380a042807714394c0b736,
+    type: 3}
+  _playerLaserPoolSize: 15
+  _playerLaserPool: []
+  _playerLaserContainer: {fileID: 4116375423243644897}
+  _tripleLaserPrefab: {fileID: 664990262617346013, guid: 5548ebc3ad3706f48b158343c96948c4,
+    type: 3}
+  _tripleLaserPoolSize: 15
+  _tripleLaserPool: []
+  _tripleLaserContainer: {fileID: 1750628753188218268}
+  _enemyLaserPrefab: {fileID: 7348024244183383877, guid: a1490d6306999e44680ec8ba00815464,
+    type: 3}
+  _enemyLaserPoolSize: 10
+  _enemyLaserPool: []
+  _enemyLaserContainer: {fileID: 4136343919615139540}
   _minSecondsEnemiesSpawn: 2
   _maxSecondsEnemiesSpawn: 4
   _minSecondsPowerUpsSpawn: 3

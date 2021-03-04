@@ -10,9 +10,14 @@ namespace StarShip01.Combat
         [SerializeField] private float _laserDestroyTime = 5.0f;
 
 
-        private void Start()
+        private void OnEnable()
         {
-            Destroy(this.gameObject, _laserDestroyTime);
+            Invoke("SetLaserInactive", _laserDestroyTime);
+        }
+
+        private void SetLaserInactive()
+        {
+            this.gameObject.SetActive(false);
         }
 
         private void FixedUpdate()
