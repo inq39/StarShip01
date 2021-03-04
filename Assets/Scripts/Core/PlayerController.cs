@@ -140,18 +140,21 @@ namespace StarShip01.Core
                 case 0:
                     GetComponent<Collider2D>().enabled = false;
                     Instantiate(_playerExplosionAnimation, transform.position, Quaternion.identity);
-                    //this.gameObject.SetActive(false);
                     Destroy(this.gameObject, 0.15f);
                     break;
             }
         }
-        private void OnTriggerEnter2D(Collider2D collision)
+        private void OnTriggerEnter2D(Collider2D trigger)
         {
-            if (collision.gameObject.CompareTag("Enemy_Laser_Projectile"))
+            if (trigger.gameObject.CompareTag("Enemy_Laser_Projectile"))
             {
                 DestroyLive();
-                Destroy(collision.gameObject);
+                Destroy(trigger.gameObject);
             }
+            else if (trigger.gameObject.CompareTag("Enemy"))
+            {
+                DestroyLive();
+            }      
         }
 
         #region PowerUps - activation + timer

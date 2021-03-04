@@ -151,6 +151,7 @@ MonoBehaviour:
   _enemyLaserPrefab: {fileID: 7348024244183383877, guid: a1490d6306999e44680ec8ba00815464,
     type: 3}
   _standardDestroyTime: 6
+  _defaultSprite: {fileID: 21300000, guid: 3154912113cbb4a498df6f571c74e18c, type: 3}
 --- !u!82 &-4024500991485640701
 AudioSource:
   m_ObjectHideFlags: 0

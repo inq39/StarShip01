@@ -10,7 +10,7 @@ namespace StarShip01.Manager
         private int _score;
         public int Score { get { return _score; } }
 
-        [SerializeField] private int _lives;
+        private int _lives;
         public int Lives { get { return _lives; } }
         private int _highScore;
         public int HighScore { get { return _highScore; } }
@@ -20,18 +20,21 @@ namespace StarShip01.Manager
         {
             CheckForRestart();
         }
+        private void Start()
+        {
+            InitializeLevel();
+        }
 
         private void CheckForRestart()
         {
             if (_isGameOver && Input.GetKeyDown(KeyCode.R))
             {
-                ResetLevel();
-                SceneManager.LoadSceneAsync(1);
-                
+                InitializeLevel();
+                SceneManager.LoadSceneAsync(1);        
             }
         }
 
-        private void ResetLevel()
+        private void InitializeLevel()
         {
             _lives = 3;
             _score = 0;

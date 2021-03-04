@@ -10,18 +10,13 @@ namespace StarShip01.Core
         [SerializeField] private int _enemyScoreValue;
         [SerializeField] private GameObject _enemyLaserPrefab;
         [SerializeField] private float _standardDestroyTime; // 6f
-        private PlayerController _playerController;
+        [SerializeField] private Sprite _defaultSprite;
         private Animator _destroyEnemyAnimator;
         private AudioSource _explosionSound;
         private float _speedFactor;
 
         void Start()
         {
-            _playerController = GameObject.Find("Player").GetComponent<PlayerController>();
-            if (_playerController == null)
-            {
-                Debug.LogError("Player is NULL.");
-            }
 
             _destroyEnemyAnimator = GetComponent<Animator>();
             if (_destroyEnemyAnimator == null)
@@ -35,12 +30,6 @@ namespace StarShip01.Core
         private void OnEnable()
         {
             _speedFactor = 1.0f;
-            GetComponent<Collider2D>().enabled = true;
-            _destroyEnemyAnimator = GetComponent<Animator>();
-            if (_destroyEnemyAnimator == null)
-            {
-                Debug.LogError("Animator is NULL.");
-            }
             InvokeRepeating("ShootLaser", 1f, Random.Range(0, 3));
             Invoke("SetInactive", _standardDestroyTime);
         }
@@ -78,11 +67,6 @@ namespace StarShip01.Core
             if (trigger.gameObject.CompareTag("Player")) // collision with player without score
             {
                 DestroyEnemy();
-
-                if (_playerController != null)
-                {
-                    _playerController.DestroyLive();
-                }
             }
         }
 
@@ -98,7 +82,8 @@ namespace StarShip01.Core
 
         private void SetInactive()
         {
-            _destroyEnemyAnimator.ResetTrigger("IsEnemyDestroyed");
+            GetComponent<SpriteRenderer>().sprite = _defaultSprite;
+            GetComponent<Collider2D>().enabled = true;
             this.gameObject.SetActive(false);
         }
     }
