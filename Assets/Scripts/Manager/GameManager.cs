@@ -4,7 +4,9 @@ using UnityEngine.SceneManagement;
 namespace StarShip01.Manager
 {
     public class GameManager : MonoSingleton<GameManager>
-    {      
+    {
+        private bool _isGamePaused;
+        public bool IsGamePaused { get { return _isGamePaused; } }
         private bool _isGameOver;
         public bool IsGameOver { get { return _isGameOver; } }
         private int _score;
@@ -22,23 +24,58 @@ namespace StarShip01.Manager
         }
         private void Start()
         {
-            InitializeLevel();
+            InitGameStats();
+            InitializeGUI();
+        }
+
+        public void PauseGame()
+        {
+            _isGamePaused = !_isGamePaused;
+
+            if (_isGamePaused)
+            {
+                Time.timeScale = 0f;
+                AudioListener.pause = true;
+                UIManager.Instance.PauseGame();
+            }
+            else
+            {
+                AudioListener.pause = false;
+                Time.timeScale = 1f;
+                UIManager.Instance.ResumeGame();
+            }
+        }
+
+        public void InitGameStats()
+        {           
+            _highScore = 0;
+            _lives = 3;
+            _score = 0;
+            _isGameOver = false;
+            _isGamePaused = false;
+            //UIM Hint Anzeige
+        }
+
+
+        public void ReturnToMainMenu()
+        {
+            InitGameStats();
+            AudioListener.pause = false;
+            SpawnManager.Instance.StopAllCoroutines();
+            SpawnManager.Instance.SetAllListsInactive();
         }
 
         private void CheckForRestart()
         {
             if (_isGameOver && Input.GetKeyDown(KeyCode.R))
             {
-                InitializeLevel();
+                InitializeGUI();
                 SceneManager.LoadSceneAsync(1);        
             }
         }
 
-        private void InitializeLevel()
+        public void InitializeGUI()
         {
-            _lives = 3;
-            _score = 0;
-            _isGameOver = false;
             UIManager.Instance.StartNewLevel();
             UIManager.Instance.UpdateScoreText();
             UIManager.Instance.UpdateLivesStatus();

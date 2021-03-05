@@ -137,6 +137,7 @@ namespace StarShip01.Manager
                 if (enemy.activeInHierarchy == false)
                 {
                     enemy.SetActive(true);
+                    enemy.GetComponent<BoxCollider2D>().enabled = true;
                     return enemy;
                 }
             }

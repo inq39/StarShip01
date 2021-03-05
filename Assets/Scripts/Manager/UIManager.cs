@@ -15,6 +15,8 @@ namespace StarShip01.Manager
         [SerializeField] private Color[] _playerLiveColor;
         [SerializeField] private GameObject _gameOverText;
         [SerializeField] private TextMeshProUGUI _restartLevelText;
+        [SerializeField] private GameObject _pauseMenu;
+        [SerializeField] private GameObject _GUI;
 
         // Update is called once per frame
         void Start()
@@ -26,6 +28,18 @@ namespace StarShip01.Manager
         {
             _gameOverText.gameObject.SetActive(false);
             _restartLevelText.gameObject.SetActive(false);
+        }
+
+        public void PauseGame()
+        {
+            _pauseMenu.SetActive(true);
+            _GUI.SetActive(false);
+        }
+
+        public void ResumeGame()
+        {
+            _pauseMenu.SetActive(false);
+            _GUI.SetActive(true);
         }
 
         public void UpdateScoreText()

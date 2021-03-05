@@ -56,6 +56,15 @@ namespace StarShip01.Core
             _verticalInput = Input.GetAxis("Vertical");
             MovePlayer();
             ShootLaser();
+            PauseGame();
+        }
+
+        private void PauseGame()
+        {
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                GameManager.Instance.PauseGame();
+            }
         }
 
         void MovePlayer()
