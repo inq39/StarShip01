@@ -13,7 +13,7 @@ namespace StarShip01.Manager
         [SerializeField] private Image _playerStatus;
         [SerializeField] private Sprite[] _playerLiveSprites;
         [SerializeField] private Color[] _playerLiveColor;
-        [SerializeField] private TextMeshProUGUI _gameOverText;
+        [SerializeField] private GameObject _gameOverText;
         [SerializeField] private TextMeshProUGUI _restartLevelText;
 
         // Update is called once per frame

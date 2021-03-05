@@ -200,8 +200,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _enemyPrefab:
   - {fileID: 8550623365197739118, guid: 98f13057ff74f1a4a974f13d8c192f80, type: 3}
-  - {fileID: 8550623365197739118, guid: 98f13057ff74f1a4a974f13d8c192f80, type: 3}
-  - {fileID: 8550623365197739118, guid: 98f13057ff74f1a4a974f13d8c192f80, type: 3}
+  - {fileID: 1080917391658087071, guid: 2b998f8fc001c404a8e70f79de974c6e, type: 3}
+  - {fileID: 530009822690125917, guid: 07399aab3abcc9f4795f902ead3200fd, type: 3}
   _enemyPoolSize: 10
   _enemyPool: []
   _enemyContainer: {fileID: 1922735112}
@@ -228,6 +228,6 @@ MonoBehaviour:
   _enemyLaserPool: []
   _enemyLaserContainer: {fileID: 4136343919615139540}
   _minSecondsEnemiesSpawn: 2
-  _maxSecondsEnemiesSpawn: 4
-  _minSecondsPowerUpsSpawn: 3
-  _maxSecondsPowerUpsSpawn: 7
+  _maxSecondsEnemiesSpawn: 5
+  _minSecondsPowerUpsSpawn: 4
+  _maxSecondsPowerUpsSpawn: 8
