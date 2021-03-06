@@ -8,9 +8,9 @@ namespace StarShip01.UI
 {
     public class MainMenu : MonoBehaviour
     {
-        public void StartGame()
+        public void PlayGame()
         {
-            InitLevel();
+            SceneManager.LoadSceneAsync(1);
         }
 
         public void QuitGame()
@@ -18,37 +18,24 @@ namespace StarShip01.UI
             Application.Quit();
         }
 
-        public void ResumeGame()
+        public void ResumeLevel()
         {
             GameManager.Instance.PauseGame();
         }
 
         public void RestartLevel()
         {
-            InitLevel();
             GameManager.Instance.PauseGame();
-
-        }
-
-        private void InitLevel()
-        {
-            GameManager.Instance.InitializeGUI();
-            SpawnManager.Instance.StopAllCoroutines();
-            SpawnManager.Instance.SetAllListsInactive();
+            GameManager.Instance.ResetLevel();
             SceneManager.LoadSceneAsync(1);
-
         }
 
         public void ReturnToMainMenu()
         {
+            GameManager.Instance.ResetHighScore();
+            GameManager.Instance.PauseGame();           
+            GameManager.Instance.ResetLevel();
             SceneManager.LoadSceneAsync(0);
-            GameManager.Instance.ReturnToMainMenu();
         }
-
-        public void StartGameFromMainMenu()
-        {
-            SceneManager.LoadSceneAsync(1);
-        }
-
     }
 }

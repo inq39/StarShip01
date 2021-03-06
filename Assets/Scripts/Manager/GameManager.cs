@@ -15,8 +15,7 @@ namespace StarShip01.Manager
         private int _lives;
         public int Lives { get { return _lives; } }
         private int _highScore;
-        public int HighScore { get { return _highScore; } }
-
+        public int HighScore { get  { return _highScore;  } }
 
         private void Update()
         {
@@ -26,6 +25,11 @@ namespace StarShip01.Manager
         {
             InitGameStats();
             InitializeGUI();
+            _highScore = 0;
+        }
+        public void ResetHighScore()
+        {
+            _highScore = 0;
         }
 
         public void PauseGame()
@@ -46,9 +50,8 @@ namespace StarShip01.Manager
             }
         }
 
-        public void InitGameStats()
+        private void InitGameStats()
         {           
-            _highScore = 0;
             _lives = 3;
             _score = 0;
             _isGameOver = false;
@@ -56,25 +59,27 @@ namespace StarShip01.Manager
             //UIM Hint Anzeige
         }
 
-
-        public void ReturnToMainMenu()
+        public void ResetLevel()
         {
             InitGameStats();
             AudioListener.pause = false;
             SpawnManager.Instance.StopAllCoroutines();
             SpawnManager.Instance.SetAllListsInactive();
+            InitializeGUI();
         }
 
         private void CheckForRestart()
         {
             if (_isGameOver && Input.GetKeyDown(KeyCode.R))
             {
+                InitGameStats();
                 InitializeGUI();
+                AudioListener.pause = false;
                 SceneManager.LoadSceneAsync(1);        
             }
         }
 
-        public void InitializeGUI()
+        private void InitializeGUI()
         {
             UIManager.Instance.StartNewLevel();
             UIManager.Instance.UpdateScoreText();

@@ -63,16 +63,19 @@ namespace StarShip01.Core
 
         private void OnTriggerEnter2D(Collider2D trigger)
         {
-            if (trigger.gameObject.CompareTag("Laser_Projectile")) // hit by player_laser with score
+            if (!GameManager.Instance.IsGameOver)
             {
-                GameManager.Instance.UpdateScore(_enemyScoreValue);
-                trigger.gameObject.SetActive(false);
-                DestroyEnemy();
-            }
+                if (trigger.gameObject.CompareTag("Laser_Projectile")) // hit by player_laser with score
+                {
+                    GameManager.Instance.UpdateScore(_enemyScoreValue);
+                    trigger.gameObject.SetActive(false);
+                    DestroyEnemy();
+                }
 
-            if (trigger.gameObject.CompareTag("Player")) // collision with player without score
-            {
-                DestroyEnemy();
+                if (trigger.gameObject.CompareTag("Player")) // collision with player without score
+                {
+                    DestroyEnemy();
+                }
             }
         }
 
