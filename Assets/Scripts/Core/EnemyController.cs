@@ -10,8 +10,9 @@ namespace StarShip01.Core
         [SerializeField] private int _enemyScoreValue;
         [SerializeField] private float _returnToPoolTime; // 6f
         [SerializeField] private Sprite _defaultSprite;
+        [SerializeField] private AudioSource _laserShootSound;
         private Animator _destroyEnemyAnimator;
-        private AudioSource _explosionSound;
+        [SerializeField] private AudioSource _explosionSound;
         private float _speedFactor;
 
         void Start()
@@ -19,11 +20,6 @@ namespace StarShip01.Core
             _destroyEnemyAnimator = GetComponent<Animator>();
             if (_destroyEnemyAnimator == null)           
                 Debug.LogError("Animator is NULL.");
-            
-
-            _explosionSound = GetComponent<AudioSource>();
-            if (_explosionSound == null)
-                Debug.LogError("ExplosionSound is NULL.");
         }
 
         private void OnEnable()
@@ -49,6 +45,8 @@ namespace StarShip01.Core
             GameObject firedLaser = SpawnManager.Instance.RequestEnemyLaser();
             firedLaser.transform.position = transform.position;
             firedLaser.transform.rotation = Quaternion.identity;
+            if (transform.position.y > 3.3f)
+            _laserShootSound.Play();
         }
 
         private void SetEnemyInactive()

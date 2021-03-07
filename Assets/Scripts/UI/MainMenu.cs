@@ -10,7 +10,11 @@ namespace StarShip01.UI
     {
         public void PlayGame()
         {
-            SceneManager.LoadSceneAsync(1);
+            if (GameManager.Instance)
+            {
+                GameManager.Instance.ToggleWelcomeMessage();
+            }
+            SceneManager.LoadSceneAsync(1);       
         }
 
         public void QuitGame()
@@ -27,6 +31,7 @@ namespace StarShip01.UI
         {
             GameManager.Instance.PauseGame();
             GameManager.Instance.ResetLevel();
+            GameManager.Instance._musicLevel.Pause();
             SceneManager.LoadSceneAsync(1);
         }
 
@@ -35,7 +40,9 @@ namespace StarShip01.UI
             GameManager.Instance.ResetHighScore();
             GameManager.Instance.PauseGame();           
             GameManager.Instance.ResetLevel();
+            GameManager.Instance._musicLevel.Pause();         
             SceneManager.LoadSceneAsync(0);
+            //GameManager.Instance.ToggleWelcomeMessage();
         }
     }
 }

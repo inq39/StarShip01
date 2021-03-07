@@ -6,12 +6,6 @@ namespace StarShip01.Manager
 {
     public class AudioManager : MonoSingleton<AudioManager>
     {
-        [SerializeField] private AudioSource _gameMusic;
-        [SerializeField] private AudioSource _mainMenuMusic;
 
-
-
-
-         
     }
 }

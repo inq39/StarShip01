@@ -1,4 +1,5 @@
 ﻿using StarShip01.Manager;
+using System;
 using System.Collections;
 using UnityEngine;
 
@@ -48,15 +49,28 @@ namespace StarShip01.Core
             _laserShootAudioClip = GetComponent<AudioSource>();
             if (_laserShootAudioClip == null)
                 Debug.LogError("The AudioSource on the Player is null.");
+
         }
 
         void Update()
         {
             _horizontalInput = Input.GetAxis("Horizontal");
             _verticalInput = Input.GetAxis("Vertical");
-            MovePlayer();
-            ShootLaser();
-            PauseGame();
+
+            if (!GameManager.Instance.WelcomeMessageIsShowed)
+            {
+                MovePlayer();
+                ShootLaser();
+                PauseGame();
+            }
+            else
+            {
+                if (Input.GetKeyDown(KeyCode.Space))
+                {
+                    UIManager.Instance.DeactivateWelcomeMessage();
+                    GameManager.Instance.WelcomeMessageIsShowed = false;
+                }
+            }
         }
 
         private void PauseGame()
@@ -197,7 +211,7 @@ namespace StarShip01.Core
         }
 
         IEnumerator SetTripleShotActiveTime()
-        {
+        {    
             yield return new WaitForSeconds(_tripleShotDuration);
             _isTripleShotActive = false;
         }
@@ -206,7 +220,7 @@ namespace StarShip01.Core
         {
             _isSpeedBoostActive = true;
             _playerHorizontalSpeed *= _speedBoostMultiplier;
-            _speedBoostMultiplier *= _speedBoostMultiplier;
+            _playerVerticalSpeed *= _speedBoostMultiplier;
             StartCoroutine(SetSpeedBoostActiveTime());
         }
 
@@ -215,7 +229,7 @@ namespace StarShip01.Core
             yield return new WaitForSeconds(_speedBoostDuration);
             _isSpeedBoostActive = false;
             _playerHorizontalSpeed /= _speedBoostMultiplier;
-            _speedBoostMultiplier /= _speedBoostMultiplier;
+            _playerVerticalSpeed /= _speedBoostMultiplier;
         }
 
         private void SetShieldActive()

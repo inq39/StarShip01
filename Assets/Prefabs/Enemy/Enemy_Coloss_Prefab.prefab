@@ -7,6 +7,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -4024500991485640701, guid: 98f13057ff74f1a4a974f13d8c192f80,
+        type: 3}
+      propertyPath: Priority
+      value: 93
+      objectReference: {fileID: 0}
     - target: {fileID: 944547139418031639, guid: 98f13057ff74f1a4a974f13d8c192f80,
         type: 3}
       propertyPath: m_Color.a
@@ -110,7 +115,7 @@ PrefabInstance:
     - target: {fileID: 8550623365197739118, guid: 98f13057ff74f1a4a974f13d8c192f80,
         type: 3}
       propertyPath: m_Name
-      value: Enemy_Prefab
+      value: Enemy_Coloss_Prefab
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 98f13057ff74f1a4a974f13d8c192f80, type: 3}

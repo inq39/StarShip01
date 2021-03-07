@@ -20,7 +20,7 @@ namespace StarShip01.Core
             {
                 _rotateSpeed *= _speedFactorCollision;
                 Instantiate(_asteroidExplosionAnimation, transform.position, Quaternion.identity);
-
+                GameManager.Instance._musicLevel.Play();
                 SpawnManager.Instance.StartSpawning();
                 other.gameObject.SetActive(false);
                 Destroy(this.gameObject, 0.15f);

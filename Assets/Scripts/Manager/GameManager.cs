@@ -17,6 +17,10 @@ namespace StarShip01.Manager
         private int _highScore;
         public int HighScore { get  { return _highScore;  } }
 
+        [SerializeField] public AudioSource _musicLevel;
+        private bool _welcomeMessageIsShowed = true;
+        public bool WelcomeMessageIsShowed { get { return _welcomeMessageIsShowed; } set { _welcomeMessageIsShowed = value; } }
+
         private void Update()
         {
             CheckForRestart();
@@ -31,6 +35,11 @@ namespace StarShip01.Manager
         {
             _highScore = 0;
         }
+        public void ToggleWelcomeMessage()
+        {
+            _welcomeMessageIsShowed = true;
+            UIManager.Instance.ActivateWelcomeMessage();
+        }
 
         public void PauseGame()
         {
@@ -39,12 +48,12 @@ namespace StarShip01.Manager
             if (_isGamePaused)
             {
                 Time.timeScale = 0f;
-                AudioListener.pause = true;
+                _musicLevel.Pause();
                 UIManager.Instance.PauseGame();
             }
             else
             {
-                AudioListener.pause = false;
+                _musicLevel.Play();
                 Time.timeScale = 1f;
                 UIManager.Instance.ResumeGame();
             }
@@ -62,7 +71,7 @@ namespace StarShip01.Manager
         public void ResetLevel()
         {
             InitGameStats();
-            AudioListener.pause = false;
+            _musicLevel.Play();
             SpawnManager.Instance.StopAllCoroutines();
             SpawnManager.Instance.SetAllListsInactive();
             InitializeGUI();
@@ -74,7 +83,7 @@ namespace StarShip01.Manager
             {
                 InitGameStats();
                 InitializeGUI();
-                AudioListener.pause = false;
+                _musicLevel.Play();
                 SceneManager.LoadSceneAsync(1);        
             }
         }

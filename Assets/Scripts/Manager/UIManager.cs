@@ -17,6 +17,7 @@ namespace StarShip01.Manager
         [SerializeField] private TextMeshProUGUI _restartLevelText;
         [SerializeField] private GameObject _pauseMenu;
         [SerializeField] private GameObject _GUI;
+        [SerializeField] private GameObject _introText;
 
         // Update is called once per frame
         void Start()
@@ -34,6 +35,15 @@ namespace StarShip01.Manager
         {
             _pauseMenu.SetActive(true);
             _GUI.SetActive(false);
+        }
+
+        public void DeactivateWelcomeMessage()
+        {
+            _introText.SetActive(false);
+        }
+        public void ActivateWelcomeMessage()
+        {
+            _introText.SetActive(true);
         }
 
         public void ResumeGame()

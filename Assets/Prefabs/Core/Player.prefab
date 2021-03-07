@@ -106,8 +106,8 @@ MonoBehaviour:
   _playerVerticalSpeed: 500
   _playerHorizontalSpeed: 1000
   _speedBoostMultiplier: 1.3
-  _speedBoostDuration: 0
-  _tripleShotDuration: 0
+  _speedBoostDuration: 4
+  _tripleShotDuration: 3
   _fireRate: 0.25
   _xMaxPosition: 9.5
   _yMinPosition: -3
