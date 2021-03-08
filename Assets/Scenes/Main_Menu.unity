@@ -937,10 +937,25 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
+    - target: {fileID: 2414672211134446132, guid: 1f37f7d949fa595489e2e39cccb5d12a,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2415256797616758030, guid: 1f37f7d949fa595489e2e39cccb5d12a,
         type: 3}
       propertyPath: m_Name
       value: Main_Menu
+      objectReference: {fileID: 0}
+    - target: {fileID: 2415386709419470854, guid: 1f37f7d949fa595489e2e39cccb5d12a,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2415951424142831130, guid: 1f37f7d949fa595489e2e39cccb5d12a,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2494015689688653026, guid: 1f37f7d949fa595489e2e39cccb5d12a,
         type: 3}
