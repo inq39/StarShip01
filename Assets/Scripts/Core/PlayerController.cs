@@ -24,6 +24,7 @@ namespace StarShip01.Core
         [SerializeField] private GameObject _playerShield;
         [SerializeField] private GameObject _fireOnLeftWing, _fireOnRightWing;
         [SerializeField] private GameObject _playerExplosionAnimation;
+        [SerializeField] private Animator _cameraShake;
 
         private float _nextFire = 0.0f;
         private float _horizontalInput;
@@ -145,6 +146,8 @@ namespace StarShip01.Core
         }
         public void DestroyLive()
         {
+            _cameraShake.SetTrigger("Camera_Shake");
+
             if (_isShieldActive)
             {
                 _isShieldActive = false;
