@@ -254,7 +254,6 @@ namespace StarShip01.Manager
 
             while (GameManager.Instance.IsGameOver == false)
             {
-                Debug.Log(decreaseMaxSpawnTime);
                 yield return new WaitForSeconds(Random.Range(_minSecondsEnemiesSpawn, _maxSecondsEnemiesSpawn - decreaseMaxSpawnTime));
                 GameObject enemy = RequestEnemy();
                 enemy.transform.position = CalculateRandomSpawnPosition();
@@ -270,7 +269,6 @@ namespace StarShip01.Manager
 
             while (GameManager.Instance.IsGameOver == false)
             {
-                Debug.Log(increaseMaxSpawnTime);
                 yield return new WaitForSeconds(Random.Range(_minSecondsPowerUpsSpawn, _maxSecondsPowerUpsSpawn + increaseMaxSpawnTime));
                 GameObject powerUp = RequestPowerUp();
                 powerUp.transform.position = CalculateRandomSpawnPosition();
