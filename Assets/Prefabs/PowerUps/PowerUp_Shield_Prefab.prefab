@@ -167,4 +167,4 @@ MonoBehaviour:
   _powerUpSpeed: 3
   _powerupID: 0
   _powerUpAudioClip: {fileID: 8300000, guid: 5ee343246919d2b4bba63ae629e95494, type: 3}
-  _returnToPoolTime: 20
+  _returnToPoolTime: 5

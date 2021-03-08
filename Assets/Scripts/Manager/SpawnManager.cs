@@ -37,10 +37,10 @@ namespace StarShip01.Manager
         private float _spawnPositionY = 7.0f;
 
         [Header("Spawn Values")]
-        [SerializeField] private int _minSecondsEnemiesSpawn = 2;
-        [SerializeField] private int _maxSecondsEnemiesSpawn = 4;
-        [SerializeField] private int _minSecondsPowerUpsSpawn = 3;
-        [SerializeField] private int _maxSecondsPowerUpsSpawn = 7;
+        [SerializeField] private int _minSecondsEnemiesSpawn; //1
+        [SerializeField] private int _maxSecondsEnemiesSpawn; //5
+        [SerializeField] private int _minSecondsPowerUpsSpawn; //5
+        [SerializeField] private int _maxSecondsPowerUpsSpawn; //8
 
         private void Start()
         {
@@ -106,8 +106,16 @@ namespace StarShip01.Manager
             {
                 if (powerUp.activeInHierarchy == false)
                 {
-                    powerUp.SetActive(true);
-                    return powerUp;
+                    int random = Random.Range(0, 4);
+                    if (random == 0)
+                    {
+                        powerUp.SetActive(true);
+                        return powerUp;
+                    }
+                    else
+                    {
+                        continue;
+                    }
                 }
             }
             int randomPrefab = Random.Range(0, _powerUpPrefab.Length);
@@ -136,9 +144,17 @@ namespace StarShip01.Manager
             {
                 if (enemy.activeInHierarchy == false)
                 {
-                    enemy.SetActive(true);
-                    enemy.GetComponent<BoxCollider2D>().enabled = true;
-                    return enemy;
+                    int random = Random.Range(0, 2);
+                    if (random == 0)
+                    {
+                        enemy.SetActive(true);
+                        enemy.GetComponent<BoxCollider2D>().enabled = true;
+                        return enemy;
+                    }
+                    else
+                    {
+                        continue;
+                    }
                 }
             }
             int randomEnemy = Random.Range(0, _enemyPrefab.Length);
@@ -234,23 +250,32 @@ namespace StarShip01.Manager
 
         IEnumerator SpawnEnemies()
         {
+            float decreaseMaxSpawnTime = 0.0f;
+
             while (GameManager.Instance.IsGameOver == false)
             {
-                yield return new WaitForSeconds(Random.Range(_minSecondsEnemiesSpawn, _maxSecondsEnemiesSpawn));
+                Debug.Log(decreaseMaxSpawnTime);
+                yield return new WaitForSeconds(Random.Range(_minSecondsEnemiesSpawn, _maxSecondsEnemiesSpawn - decreaseMaxSpawnTime));
                 GameObject enemy = RequestEnemy();
                 enemy.transform.position = CalculateRandomSpawnPosition();
                 enemy.transform.rotation = Quaternion.identity;
+                if (decreaseMaxSpawnTime < _maxSecondsEnemiesSpawn - _minSecondsEnemiesSpawn)
+                decreaseMaxSpawnTime += 0.05f;
             }
         }
 
         IEnumerator SpawnPowerUps()
         {
+            float increaseMaxSpawnTime = 0f;
+
             while (GameManager.Instance.IsGameOver == false)
             {
-                yield return new WaitForSeconds(Random.Range(_minSecondsPowerUpsSpawn, _maxSecondsPowerUpsSpawn));
+                Debug.Log(increaseMaxSpawnTime);
+                yield return new WaitForSeconds(Random.Range(_minSecondsPowerUpsSpawn, _maxSecondsPowerUpsSpawn + increaseMaxSpawnTime));
                 GameObject powerUp = RequestPowerUp();
                 powerUp.transform.position = CalculateRandomSpawnPosition();
                 powerUp.transform.rotation = Quaternion.identity;
+                increaseMaxSpawnTime += 0.2f;
             }
         }
 

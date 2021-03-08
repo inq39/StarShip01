@@ -8,29 +8,24 @@ namespace StarShip01.Manager
 {
     public class UIManager : MonoSingleton<UIManager>
     {
+        [Header("HUD")]
         [SerializeField] private TextMeshProUGUI _scoreText;
         [SerializeField] private TextMeshProUGUI _highScoreText;
         [SerializeField] private Image _playerStatus;
         [SerializeField] private Sprite[] _playerLiveSprites;
         [SerializeField] private Color[] _playerLiveColor;
+        [Header("PopUps")]
         [SerializeField] private GameObject _gameOverText;
         [SerializeField] private TextMeshProUGUI _restartLevelText;
         [SerializeField] private GameObject _pauseMenu;
         [SerializeField] private GameObject _GUI;
         [SerializeField] private GameObject _introText;
 
-        // Update is called once per frame
-        void Start()
-        {
-            StartNewLevel();
-        }
-
-        public void StartNewLevel()
+        public void DeactivateGameOverText()
         {
             _gameOverText.gameObject.SetActive(false);
             _restartLevelText.gameObject.SetActive(false);
         }
-
         public void PauseGame()
         {
             _pauseMenu.SetActive(true);

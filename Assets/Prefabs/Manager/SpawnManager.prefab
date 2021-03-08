@@ -227,7 +227,7 @@ MonoBehaviour:
   _enemyLaserPoolSize: 10
   _enemyLaserPool: []
   _enemyLaserContainer: {fileID: 4136343919615139540}
-  _minSecondsEnemiesSpawn: 2
+  _minSecondsEnemiesSpawn: 1
   _maxSecondsEnemiesSpawn: 5
-  _minSecondsPowerUpsSpawn: 4
+  _minSecondsPowerUpsSpawn: 5
   _maxSecondsPowerUpsSpawn: 8

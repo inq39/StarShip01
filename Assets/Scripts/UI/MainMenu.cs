@@ -42,7 +42,6 @@ namespace StarShip01.UI
             GameManager.Instance.ResetLevel();
             GameManager.Instance._musicLevel.Pause();         
             SceneManager.LoadSceneAsync(0);
-            //GameManager.Instance.ToggleWelcomeMessage();
         }
     }
 }

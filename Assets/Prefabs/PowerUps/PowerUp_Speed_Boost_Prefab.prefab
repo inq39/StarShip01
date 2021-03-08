@@ -101,7 +101,7 @@ MonoBehaviour:
   _powerUpSpeed: 4
   _powerupID: 1
   _powerUpAudioClip: {fileID: 8300000, guid: 5ee343246919d2b4bba63ae629e95494, type: 3}
-  _returnToPoolTime: 20
+  _returnToPoolTime: 5
 --- !u!61 &6259126369964207270
 BoxCollider2D:
   m_ObjectHideFlags: 0

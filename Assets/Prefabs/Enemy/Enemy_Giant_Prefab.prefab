@@ -97,6 +97,11 @@ PrefabInstance:
       propertyPath: _enemyScoreValue
       value: 7
       objectReference: {fileID: 0}
+    - target: {fileID: 3723347381096322190, guid: 98f13057ff74f1a4a974f13d8c192f80,
+        type: 3}
+      propertyPath: _returnToPoolTime
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 8550623365197739118, guid: 98f13057ff74f1a4a974f13d8c192f80,
         type: 3}
       propertyPath: m_Name

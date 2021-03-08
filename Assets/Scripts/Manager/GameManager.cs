@@ -84,13 +84,13 @@ namespace StarShip01.Manager
                 InitGameStats();
                 InitializeGUI();
                 _musicLevel.Play();
+                UIManager.Instance.DeactivateGameOverText();
                 SceneManager.LoadSceneAsync(1);        
             }
         }
 
         private void InitializeGUI()
         {
-            UIManager.Instance.StartNewLevel();
             UIManager.Instance.UpdateScoreText();
             UIManager.Instance.UpdateLivesStatus();
             UIManager.Instance.UpdateHighScoreText();
